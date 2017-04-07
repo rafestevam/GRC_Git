@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <custom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/custom.xsd">
-
-	<objectType id="ISSUE" extends="MONITORABLE" xmlexport="false" clientDependent="false" displayAttribute="name"
+ 
+    <objectType id="ISSUE" extends="MONITORABLE" xmlexport="false" clientDependent="false" displayAttribute="name"
                 licensedComponentIds="im" dataKind="transactiondata"
                 mashzoneId="220" image="iconlib/icons/content/issue_16.png">
+
+<!-- GRC74 ADD -->
+         <enumAttrType id="action_type" enumeration="action_type_test" defaultValue="3"/>       
+         <enumAttrType id="acting_front" enumeration="acting_front_test" defaultValue="1"/>       
+         <dateAttrType id="issue_date" />
+         
+         <!-- <dateAttrType id="enddateactionplan">
+         	<modify name="endOfDay"/>
+         </dateAttrType>
+         -->
+         <!--
+         <dateAttrType id="enddateissue">              
+            <modify name="endOfDay"/>
+         </dateAttrType> 
+         -->
+         
+        <!-- <dateAttrType id="issue_year" /> --> 
+         <stringAttrType id="issue_year" maxCharCount="10"/>
+         <dateAttrType id="fup_date" /> 
+         <dateAttrType id="fup_date_preview" />
+         <textAttrType id="root_cause" isMassEditable="true"/>
+         
+         <enumAttrType id="process_environment" enumeration="processenvironment" isMassEditable="true"/>
+         <enumAttrType id="business_unit" enumeration="business_unit_test" isMassEditable="true"/>
+ 		 <enumAttrType id="issuesource" enumeration="issuesource_test" defaultValue="1"/> 
+         <booleanAttrType id="recurrent" defaultValue="false"/>   
+	 	 <booleanAttrType id="replanned" defaultValue="false"/>
+	 	 <stringAttrType id="rsk_name" maxCharCount="100" isMassEditable="false" />
+	 	 <stringAttrType id="ra_result" maxCharCount="50" isMassEditable="false"/>
+	 	 <stringAttrType id="ra_residualfinal"  maxCharCount="50" isMassEditable="false"/>
+	 	 <stringAttrType id="cst_modelname" maxCharCount="800" isMassEditable="false"/>
+            
+   <!-- 
+        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="54">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>      
+     
+        <listAttrType id="process" maxSize="1" objectType.idref="HIERARCHY" linkType="47"  usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="process"/>
+            </listRestriction>
+        </listAttrType>
+    -->      
+<!-- GRC74 ADD -->
 
         <listAttrType id="creator" maxSize="1" objectType.idref="USER" linkType="3103"/>
         <enumAttrType id="creator_status" enumeration="issue_creator_status" defaultValue="1"/>
@@ -40,32 +86,7 @@
         <enumAttrType id="stateTime" enumeration="issueStateTime" defaultValue="1"/>
         <enumAttrType id="priority" enumeration="issuePriority" defaultValue="2"/>
         <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="3104"/>
-        
-        <!-- Teste -->
-        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="99000">
-            <listRestriction>
-                <attributeRestriction attribute="type" value="applicationsystemtype"/>
-            </listRestriction>
-        </listAttrType>
-        <!-- 
-        <listAttrType id="customsys" objectType.idref="HIERARCHY" linkType="99000" orderType="hierarchy">
-            <listRestriction>
-                <attributeRestriction attribute="type" value="applicationsystemtype"/>
-            </listRestriction>
-        </listAttrType>
-        -->
-        <!-- Fim Teste -->
-        <enumAttrType id="action_type" enumeration="custom_enumactiontype" defaultValue="3"/> 
-        
-        <!-- Inicio GAP - GRC66 -->
-        <enumAttrType id="custom_is_creator_status" enumeration="cenum_is_creator_status" defaultValue="0"/>
-        <enumAttrType id="custom_is_owner_status" enumeration="cenum_is_owner_status" defaultValue="1"/>
-        <enumAttrType id="custom_is_reviewer_status" enumeration="cenum_is_reviewer_status" defaultValue="1"/>
-        <enumAttrType id="custom_ap_creator_status" enumeration="cenum_ap_creator_status" defaultValue="0"/>
-        <enumAttrType id="custom_ap_owner_status" enumeration="cenum_ap_owner_status" defaultValue="1"/>
-        <enumAttrType id="custom_ap_reviewer_status" enumeration="cenum_ap_reviewer_status" defaultValue="1"/>
-		<!-- Fim GAP - GRC66 -->
-	
+
         <index id="I_ISSUE_1" type="normal">
             <attributeRef attribute="name"/>
         </index>
@@ -78,6 +99,6 @@
         <index id="I_ISSUE_7" type="normal">
             <attributeRef attribute="priority"/>
         </index>
-    </objectType> 
-     
+    </objectType>
+   
 </custom>
