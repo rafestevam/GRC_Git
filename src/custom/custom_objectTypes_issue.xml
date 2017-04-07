@@ -6,7 +6,7 @@
                 mashzoneId="220" image="iconlib/icons/content/issue_16.png">
 
 <!-- GRC74 ADD -->
-         <enumAttrType id="action_type" enumeration="action_type_test" defaultValue="3"/>       
+         <enumAttrType id="action_type" enumeration="custom_enumactiontype" defaultValue="3"/>       
          <enumAttrType id="acting_front" enumeration="acting_front_test" defaultValue="1"/>       
          <dateAttrType id="issue_date" />
          
