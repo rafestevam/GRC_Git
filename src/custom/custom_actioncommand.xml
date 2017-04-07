@@ -8,7 +8,10 @@
 			<commandId id="customriskcache" description="Custom Risk Assessment Cache Action" />
 			<commandId id="customriskload" description="Custom Risk Assessment Load Action" />
 			<commandId id="customcachersk" description="Custom Cache Action for Risk" />
+			<commandId id="customissuedate" description="Custom Issue Issue Date" />	
+			<commandId id="customissuegetrisk" description="Custom pegar risco" />
 		</commandIds>
+		
 		
 		<objectTypeCommands>
 			<commandSet name="risk">
@@ -35,6 +38,12 @@
 				<actionCommand commandId="save" 			clsName="com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands.CustomTestcaseSaveActionCommand"/>
 				<actionCommand commandId="saveAndNext" 		clsName="com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands.CustomTestcaseSaveActionCommand"/>
 			</commandSet>			
+		
+			<commandSet name="issue">
+				<actionCommand commandId="customissuedate" clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueDateCommand" />									
+	            <actionCommand commandId="save" clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueSaveActionCommand" />
+    	        <actionCommand commandId="customissuegetrisk" clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueGetRiskActionCommand" />					
+		    </commandSet>			    
 		</objectTypeCommands>
 		
 		<listCommands>
