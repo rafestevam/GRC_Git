@@ -1,6 +1,7 @@
 package com.idsscheer.webapps.arcm.common.constants.metadata.attribute;
 
 import com.idsscheer.webapps.arcm.config.metadata.objecttypes.BooleanAttributeType;
+import com.idsscheer.webapps.arcm.config.metadata.objecttypes.IDateAttributeType;
 import com.idsscheer.webapps.arcm.config.metadata.objecttypes.IEnumAttributeType;
 import com.idsscheer.webapps.arcm.config.metadata.objecttypes.IStringAttributeType;
 import com.idsscheer.webapps.arcm.config.metadata.objecttypes.StringAttributeType;
@@ -46,4 +47,8 @@ public interface IIssueAttributeTypeCustom extends IIssueAttributeType {
 	public static final String STR_AP_REVIEWER_STATUS = "custom_ap_reviewer_status";
 	public static final IEnumAttributeType ATTR_AP_REVIEWER_STATUS = (IEnumAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_AP_REVIEWER_STATUS);
  
+	public static final String STR_ISSUE_DATE="issue_date";
+	public static final IDateAttributeType   ATTR_ISSUE_DATE=(IDateAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_ISSUE_DATE);
+	
+	
 }
