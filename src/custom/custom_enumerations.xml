@@ -223,6 +223,94 @@
 <!-- Final GAP GRC74 -->
 
 
+<!-- Inicio GRC100 -->
 
+	<enum id="jobs" isMultiple="false" itemClass="JobEnumerationItem" type="Number">
+        <enumitem id="all" value="-1" extendedMeaning="all" />
+        <enumitem id="undefined" value="0" extendedMeaning="please_select" formRelevant="false" filterRelevant="false"/>
+        <enumitem id="cleaningJob" value="3">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.CleaningJob"/>
+        </enumitem>
+        <enumitem id="xmlExportJob" value="11">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.XMLExportJob"/>
+        </enumitem>
+        <enumitem id="xmlImportJob" value="12">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.XMLImportJob"/>
+        </enumitem>
+        <enumitem id="asynDefaultReportJob" value="14">
+            <parameter name="ClassName" value="com.idsscheer.webapps.aam.logic.jobs.AsyncDefaultReportJob"/>
+        </enumitem>
+        <enumitem id="jobListCleaningJob" value="15">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.JobListCleaningJob"/>
+        </enumitem>
+        <enumitem id="umcSyncJob" value="16">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.UMCSyncJob"/>
+        </enumitem>
+        <enumitem id="objectExportJob" value="17">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.AMLExportJob"/>
+            <parameter name="AllowedObjectTypes" value="RISK,USER" />
+        </enumitem>
+
+        <enumitem id="checkOutJob" value="21">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.offlineprocessing.jobs.CheckOutJob"/>
+            <parameter name="AllowedObjectTypes" value="TESTCASE,RISKASSESSMENT,QUESTIONNAIRE" />
+        </enumitem>
+
+        <enumitem id="offlineProcessingAutoConfirmationJob" value="22">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.offlineprocessing.jobs.OfflineProcessingAutoConfirmationJob"/>
+            <parameter name="AllowedObjectTypes" value="TESTCASE,RISKASSESSMENT,QUESTIONNAIRE" />
+        </enumitem>
+
+        <enumitem id="generatorJob" value="40">
+            <parameter name="ClientDependent" value="true"/>
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.generic.generator.GeneratorJob"/>
+            <parameter name="AllowedObjectTypes" value="TESTCASE,RISKASSESSMENT,SURVEY,SOPROCESS,AUDIT,POLICY,POLICYREVIEW,CHANGEREVIEW,CONTROLEXECUTION" />
+        </enumitem>
+        <enumitem id="followupGeneratorJob" value="41">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.generic.generator.FollowupGeneratorJob"/>
+            <parameter name="AllowedObjectTypes" value="TESTCASE" />
+        </enumitem>
+        <enumitem id="monitorJob" value="42">
+            <parameter name="ClientDependent" value="true"/>
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.generic.monitor.MonitorJob"/>
+            <parameter name="AllowedObjectTypes" value="TESTCASE,RISKASSESSMENT,SURVEY,QUESTIONNAIRE,SOPROCESS,ISSUE,AUDIT,AUDITSTEP,POLICY,POLICYCONFIRMATION,POLICYAPPROVAL,POLICYREVIEW,CHANGEREVIEW,CONTROLEXECUTION" />
+        </enumitem>
+        <enumitem id="updaterJob" value="43">
+            <parameter name="ClientDependent" value="true"/>
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.generic.updater.UpdaterJob"/>
+            <parameter name="AllowedObjectTypes" value="TESTCASE,SURVEY,POLICY" />
+        </enumitem>
+        <enumitem id="backupJob" value="44">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.BackupJob"/>
+        </enumitem>
+        <enumitem id="restoreJob" value="45">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.RestoreBackupJob"/>
+        </enumitem>
+        <enumitem id="backupClientJob" value="46">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.BackupJob"/>
+        </enumitem>
+        <enumitem id="restoreClientJob" value="47">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.RestoreBackupJob"/>
+        </enumitem>
+        <enumitem id="eventImportJob" value="48">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.CEPImportJob"/>
+        </enumitem>
+        <enumitem id="transferJob" value="49">
+            <parameter name="ClassName" value="com.idsscheer.webapps.arcm.bl.framework.jobs.specific.TransferJob"/>
+        </enumitem>
+        
+        <!--  Início do - GRC 100 -->
+		<enumitem id="updateIssuesJob" value="50">
+            <parameter name="ClassName" value="com.exed.webapps.arcm.bl.framework.jobs.specific.IssuePendingUpdateJob"/>
+        </enumitem>
+        <!--  Fim do novo job de atualização de issues -->
+        
+        <!--  Início do GRC 82 -->
+		<enumitem id="updateIssueSLAUpdateJob" value="51">
+            <parameter name="ClassName" value="com.exed.webapps.arcm.bl.framework.jobs.specific.IssueSLAUpdateJob"/>
+        </enumitem>
+        <!--  Fim do GRC 82 -->
+    </enum>
+<!-- Inicio GRC82 -->
 
 </custom>
