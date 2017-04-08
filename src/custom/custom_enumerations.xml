@@ -52,6 +52,7 @@
     <!-- Fim GAP GRC98 -->
     
     <enum id="custom_enumactiontype" isMultiple="false" type="Number">
+    	<enumitem id="all" value="-1" extendedMeaning="all" />
     	<enumitem id="actionplan" value="1"/>
     	<enumitem id="issue" value="2"/>
     	<enumitem id="empty" value="3"/>
@@ -161,7 +162,6 @@
 <!-- Final GAP GRC52 -->
 
 <!-- Inicial GAP GRC74 -->
-
 <!-- Process Environment -->
  <enum id="processenvironment" isMultiple="true" type="Number">
         <enumitem id="cip"   value="1"/>
@@ -219,10 +219,7 @@
         <!-- workflow states -->
         <enumitem id="open_for_execution" value="6" virtualScope.idrefs="new,in_progress" formRelevant="false" filterRelevant="false"/>
         <!-- / workflow states -->
-    </enum>        	
- 				
- 				
- 				
+    </enum>        					
 <!-- Final GAP GRC74 -->
 
 
