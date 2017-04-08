@@ -46,7 +46,11 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 		try{
 			
 			IAppObj riskParentObj = this.getRiskFromControl(currParentCtrlObj);
-			this.riscoPotencial = riskParentObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).getRawValue();
+			if(riskParentObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).isEmpty()){
+				this.riscoPotencial = "Nao Avaliado";
+			}else{
+				this.riscoPotencial = riskParentObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).getRawValue();
+			}
 			log.info("Risco Pai: " + riskParentObj.getAttribute(IRiskAttributeType.ATTR_RISK_ID).getRawValue());
 			this.affectResidualRisk(riskParentObj);
 			
@@ -206,14 +210,19 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).setRawValue(riskClass3line);
 			log.info("Classificacao 3 linha - ATTR: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue());
 			
+			log.info("Calculando Amb Controle Final");
 			String riskClassFinal = this.riskFinalClassification(riskClass1line, riskClass2line, riskClass3line);
-			log.info("Classificacao Ctrl Final: " + riskClassFinal);
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+			log.info("Classificacao Ctrl Final: " + riskClassFinal);
+			log.info("Amb Controle Final Calculado...");
 			
+			log.info("Calculando Residual Final");
 			String riskResidualFinal = this.riskResidualFinal(this.riscoPotencial, riskClassFinal);
-			log.info("Classificacao Res Final: " + riskResidualFinal);
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue(riskResidualFinal);
+			log.info("Classificacao Res Final: " + riskResidualFinal);
+			log.info("Residual Final Calculado...");
 			
+			log.info("Salvando Risco");
 			riskFacade.save(riskUpdObj, this.getDefaultTransaction(), true);
 			log.info("Risco Salvo: " + riskUpdObj.getAttribute(IRiskAttributeType.ATTR_RISK_ID).getRawValue());
 			riskFacade.releaseLock(riskOVID);
@@ -388,6 +397,9 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 		
 		String riskResidualReturn = "";
 		
+		if(riskPotencial.equals("Nao Avaliado"))
+			return "Não Avaliado";
+			
 		if(riskPotencial.equals("Muito Alto") && riskControlFinal.equals("Muito Alto"))
 			riskResidualReturn = "Muito Alto";
 		

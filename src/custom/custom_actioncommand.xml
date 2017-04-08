@@ -49,7 +49,7 @@
 		<listCommands>
 			<commandSet name="common">
 				<actionCommand commandId="attach" 	   clsName="com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands.CustomAttachmentActionCommand"/><!-- GAP GRC14 -->
-				<actionCommand commandId="attachNew"   clsName="com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands.CustomNewAttachmentActionCommand"/><!-- GAP GRC14 -->
+<!-- 				<actionCommand commandId="attachNew"   clsName="com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands.CustomNewAttachmentActionCommand"/>GAP GRC14 -->
 				<actionCommand commandId="detach" 	   clsName="com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands.CustomDetachmentActionCommand"/><!-- GAP GRC14 -->
 			</commandSet>
 		</listCommands>

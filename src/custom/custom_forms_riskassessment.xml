@@ -34,6 +34,11 @@
                         <button.add button.idref="MODELLINK" location="row"/>
                     </element>
                 </row>
+                <!-- Inicio GAP - GRC39 -->
+                <row id="risk_id">
+                    <element attribute.idref="risk_id"/>
+                </row>
+                <!-- Inicio GAP - GRC39 -->
                 <row id="risk">
                     <element attribute.idref="risk">
                         <parameter name="selectionList" value="AUTO"/>

@@ -118,7 +118,7 @@ rule "custom_GRC66 opened by creator --> init attribute states [I,V]"
 		# during creation the issue manager has the same rights as the creator
 		( object is opened by its creator OR
 		  user has at object role "issuemanager" )
-		value comparison fulfilled: ":transient:" attr_value "action_type" "CONTAINS" value "empty"
+		value comparison fulfilled: ":transient:" attr_value "action_type" "CONTAINS" value "please_select"
 
 	then
 		set "name"                    editable
@@ -135,10 +135,15 @@ rule "custom_GRC66 opened by creator --> init attribute states [I,V]"
 		set "reviewers"               editable
 		set "documents"               editable
 		set "action_type"             editable #GAP - GRC66
+		set "process_environment"	  editable #GAP - GRC74
+		set "acting_front"            editable #GAP - GRC74
+		set "root_cause"              editable #GAP - GRC74
+		set "business_unit"           editable #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
+		set "acting_front"            mandatory #GAP - GRC74
 
 		set "owner_status"            invisible
 		set "owner_remark"            invisible
@@ -183,10 +188,15 @@ rule "custom_GRC66_is opened by creator --> init attribute states [I,V]"
 		set "reviewers"               editable
 		set "documents"               editable
 		set "action_type"             editable #GAP - GRC66
+		set "process_environment"	  editable #GAP - GRC74
+		set "acting_front"            editable #GAP - GRC74
+		set "root_cause"              editable #GAP - GRC74
+		set "business_unit"           editable #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
+		set "acting_front"            mandatory #GAP - GRC74
 
 		set "owner_status"            invisible
 		set "owner_remark"            invisible
@@ -231,10 +241,15 @@ rule "custom_GRC66_ap opened by creator --> init attribute states [I,V]"
 		set "reviewers"               editable
 		set "documents"               editable
 		set "action_type"             editable #GAP - GRC66
+		set "process_environment"	  editable #GAP - GRC74
+		set "acting_front"            editable #GAP - GRC74
+		set "root_cause"              editable #GAP - GRC74
+		set "business_unit"           editable #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
+		set "acting_front"            mandatory #GAP - GRC74
 
 		set "owner_status"            invisible
 		set "owner_remark"            invisible
@@ -279,10 +294,15 @@ rule "custom_GRC66_ap_hold opened by creator --> init attribute states [I,V]"
 		set "reviewers"               editable
 		set "documents"               editable
 		set "action_type"             editable #GAP - GRC66
+		set "process_environment"	  editable #GAP - GRC74
+		set "acting_front"            editable #GAP - GRC74
+		set "root_cause"              editable #GAP - GRC74
+		set "business_unit"           editable #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
+		set "acting_front"            mandatory #GAP - GRC74
 
 		set "owner_status"            invisible
 		set "owner_remark"            invisible

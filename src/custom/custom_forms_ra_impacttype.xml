@@ -245,19 +245,20 @@
                         <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
                     </element>
                 </row>
+                <!-- Exclusão de Atributos Desnecessários -->
+<!--                 <row id="th_impact_score"> -->
+<!--                     <element attribute.idref="th_impact_score"> -->
+<!--                         <parameter name="maxLength" value="20"/> -->
+<!--                         <parameter name="size" value="20"/> -->
+<!--                     </element> -->
+<!--                 </row> -->
+<!--                 <row id="th_red_impact_score"> -->
+<!--                     <element attribute.idref="th_red_impact_score"> -->
+<!--                         <parameter name="maxLength" value="20"/> -->
+<!--                         <parameter name="size" value="20"/> -->
+<!--                     </element> -->
+<!--                 </row> -->
                 <!-- Fim GAP GRC29 -->
-                <row id="th_impact_score">
-                    <element attribute.idref="th_impact_score">
-                        <parameter name="maxLength" value="20"/>
-                        <parameter name="size" value="20"/>
-                    </element>
-                </row>
-                <row id="th_red_impact_score">
-                    <element attribute.idref="th_red_impact_score">
-                        <parameter name="maxLength" value="20"/>
-                        <parameter name="size" value="20"/>
-                    </element>
-                </row>
             </rowGroup>
         </page>
     </form>

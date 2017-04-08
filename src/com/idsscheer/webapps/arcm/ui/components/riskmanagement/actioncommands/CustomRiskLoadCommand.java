@@ -1,8 +1,11 @@
 package com.idsscheer.webapps.arcm.ui.components.riskmanagement.actioncommands;
 
 import java.util.Date;
+import java.util.List;
 
 import com.idsscheer.webapps.arcm.bl.models.form.IRiskassessmentFormModel;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObj;
+import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskassessmentAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskassessmentAttributeTypeCustom;
 
@@ -14,6 +17,7 @@ public class CustomRiskLoadCommand extends RiskassessmentCacheActionCommand{
 		IRiskassessmentFormModel model = (IRiskassessmentFormModel) this.formModel;
 		
 		model.getAppObj().getAttribute(IRiskassessmentAttributeTypeCustom.ATTR_PROGRESS).setRawValue(this.defineTermStatus(model));
+		model.getAppObj().getAttribute(IRiskassessmentAttributeTypeCustom.ATTR_RISK_ID).setRawValue(this.getRiskID(model));
 		
 	}
 	
@@ -30,6 +34,16 @@ public class CustomRiskLoadCommand extends RiskassessmentCacheActionCommand{
 			//this.formModel.getAppObj().getAttribute(IRiskassessmentAttributeTypeCustom.ATTR_PROGRESS).setRawValue("Em Atraso");
 			//this.formModel.save(this.getDefaultTransaction(), IRiskassessmentAttributeTypeCustom.STR_PROGRESS);
 		}
+	}
+	
+	private String getRiskID (IRiskassessmentFormModel model){
+		
+		String riskID = "";
+		List<IAppObj> riskList = model.getAppObj().getAttribute(IRiskassessmentAttributeType.LIST_RISK).getElements(this.getUserContext());
+		for(IAppObj riskObj : riskList){
+			riskID = riskObj.getAttribute(IRiskAttributeType.ATTR_RISK_ID).getRawValue();
+		}
+		return riskID;
 	}
 	
 	protected void afterExecute(){

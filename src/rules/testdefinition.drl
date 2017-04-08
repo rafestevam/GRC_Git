@@ -64,15 +64,15 @@ rule "define all standard attributes editable [I,V]"
 		set "obj_id"                editable
 		set "obj_type"              editable
 		set "versions"              editable
-		set "control_period"        editable
+#		set "control_period"        editable
 		set "duration"              editable
-		set "enddate"               editable
+#		set "enddate"               editable
 		set "frequency"             editable
-		set "event_driven_allowed"  editable
-		set "control_period_offset" editable
+#		set "event_driven_allowed"  editable
+#		set "control_period_offset" editable
 		set "owner_group"           editable
 		set "reviewer_group"        editable
-		set "manager_group"         editable
+#		set "manager_group"         editable
 		set "startdate"             editable
 		set "isfollowup"            editable
 		set "name"                  editable
@@ -81,8 +81,8 @@ rule "define all standard attributes editable [I,V]"
 		set "testextend"            editable
 		set "testingsteps"          editable
 		set "testtype"              editable
-		set "walkthroughCounter"    editable
-		set "walkthroughName"       editable
+#		set "walkthroughCounter"    editable
+#		set "walkthroughName"       editable
 		set "aris_change_date"      editable
 		set "change_date"           editable
 		set "change_type"           editable
@@ -105,10 +105,10 @@ rule "mark_mandatory_fields_[I,V]"
 
 	then
 		set "reviewer_group"        mandatory
-		set "control_period"        mandatory
+#		set "control_period"        mandatory
 		set "testtype"              mandatory
 		set "owner_group"           mandatory
-		set "control_period_offset" mandatory
+#		set "control_period_offset" mandatory
 		set "isfollowup"            mandatory
 		set "testingsteps"          mandatory
 		set "test_nature"           mandatory
@@ -116,7 +116,7 @@ rule "mark_mandatory_fields_[I,V]"
 		set "duration"              mandatory
 		set "testextend"            mandatory
 		set "frequency"             mandatory
-		set "event_driven_allowed"  mandatory
+#		set "event_driven_allowed"  mandatory
 		set "startdate"             mandatory
 		set "name"                  mandatory
 
@@ -131,9 +131,9 @@ rule "testcase_frequency=none --> event_driven_allowed:=true [I,V]"
 	    value comparison fulfilled: ":transient:" attr_value "frequency" "CONTAINS" value "none"
 
 	then
-		set "event_driven_allowed" to value "true"
-		set "event_driven_allowed" not_mandatory
-		set "event_driven_allowed" readonly
+#		set "event_driven_allowed" to value "true"
+#		set "event_driven_allowed" not_mandatory
+#		set "event_driven_allowed" readonly
 		# deactivated for GW, CABI - 27.3.12
 		#set "testtype" to value "testofeffectiveness"
 		#set "testtype" not_mandatory

@@ -13,7 +13,7 @@
             <command id="testdefinitionActiveHierarchiesCheck" />
             <command id="assignedUsergroupsCheck" />
             <command id="dueCheck" />
-            <command id="testdefinitionRunningSignoffCheck" />
+<!--             <command id="testdefinitionRunningSignoffCheck" /> -->
             <command id="testcaseGenerate" />
         </commandchain>
 
@@ -32,7 +32,7 @@
             <command id="testdefinitionActiveHierarchiesCheck" />
             <command id="assignedUsergroupsCheck" />
             <command id="dueCheck" />
-            <command id="testdefinitionRunningSignoffCheck" />
+<!--             <command id="testdefinitionRunningSignoffCheck" /> -->
             <command id="testcaseGenerate" />
         </commandchain>
 

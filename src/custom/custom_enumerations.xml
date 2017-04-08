@@ -53,9 +53,10 @@
     
     <enum id="custom_enumactiontype" isMultiple="false" type="Number">
     	<enumitem id="all" value="-1" extendedMeaning="all" />
+    	<enumitem id="please_select" value="0" extendedMeaning="please_select" formRelevant="false" filterRelevant="false"/>
     	<enumitem id="actionplan" value="1"/>
     	<enumitem id="issue" value="2"/>
-    	<enumitem id="empty" value="3"/>
+<!--     	<enumitem id="empty" value="3"/> -->
     </enum>
     
     <!-- Inicio GAP - GRC66 -->
