@@ -3,6 +3,7 @@ package com.idsscheer.webapps.arcm.common.constants.metadata;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.EnumerationWrapper;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumeration;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumerationItem;
+import com.idsscheer.webapps.arcm.config.metadata.enumerations.JobEnumerationItem;
 
 public class EnumerationsCustom extends Enumerations {
 
@@ -70,6 +71,22 @@ public class EnumerationsCustom extends Enumerations {
 		public static final IEnumerationItem SETTLED = EnumerationsCustom.lookupEnumerationItem(ENUM, "settled");
 		public static final IEnumerationItem ATTENDED = EnumerationsCustom.lookupEnumerationItem(ENUM, "attended");
 		public static final IEnumerationItem RISK_ASSUMED = EnumerationsCustom.lookupEnumerationItem(ENUM, "risk_assumed");
+	}
+
+	public static abstract interface CENUM_IS_ACTION_TYPE {
+		public static final EnumerationWrapper ENUM = new EnumerationWrapper("action_type_test");
+		public static final IEnumerationItem actiontype1 = EnumerationsCustom.lookupEnumerationItem(ENUM,
+				"actiontype1");
+		public static final IEnumerationItem actiontype2 = EnumerationsCustom.lookupEnumerationItem(ENUM,
+				"actiontype2");
+		public static final IEnumerationItem actiontype3 = EnumerationsCustom.lookupEnumerationItem(ENUM,
+				"actiontype3");
+	}
+
+	public static abstract interface CUSTOM_JOBS {
+		public static final EnumerationWrapper ENUM = new EnumerationWrapper("jobs");
+		public static final JobEnumerationItem ISSUESPENDING = (JobEnumerationItem) EnumerationsCustom
+				.lookupEnumerationItem(ENUM, "updateIssuesJob");
 	}
 
 }
