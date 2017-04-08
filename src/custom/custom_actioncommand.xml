@@ -40,8 +40,8 @@
 			</commandSet>			
 		
 			<commandSet name="issue">
-				<actionCommand commandId="customissuedate" clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueDateCommand" />									
-	            <actionCommand commandId="save" clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueSaveActionCommand" />
+				<actionCommand commandId="customissuedate"    clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueDateCommand" />									
+	            <actionCommand commandId="save"               clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueSaveActionCommand" />
     	        <actionCommand commandId="customissuegetrisk" clsName="com.idsscheer.webapps.arcm.ui.components.issuemanagement.actioncommands.CustomIssueGetRiskActionCommand" />					
 		    </commandSet>			    
 		</objectTypeCommands>

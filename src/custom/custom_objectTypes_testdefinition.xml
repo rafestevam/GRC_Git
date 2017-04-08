@@ -46,10 +46,6 @@
         <booleanAttrType id="isfollowup" isMassEditable="true" defaultValue="true"/>
         <enumAttrType id="testtype" enumeration="testtype" isMassEditable="true"/>
         
-        <!-- GAP-GRC52 Inicio--> 
-        <enumAttrType id="origemteste" enumeration="origemteste" isMassEditable="true" defaultValue="1"/>
-        <!-- GAP-GRC52 Fim--> 
-        
         <index id="I_TESTDEFINITION_4" type="normal">
             <attributeRef attribute="walkthroughName"/>
         </index>

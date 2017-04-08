@@ -95,11 +95,11 @@
             </rowGroup>
             <rowGroup id="issue.2">
             	<!--  GAP-GRC74 INICIO -->
-				<row id="appsystem">
-                    <element attribute.idref="appsystem"/>
-                    <parameter name="selectionList" value="AUTO"/>
+<!-- 				<row id="appsystem"> -->
+<!--                     <element attribute.idref="appsystem"/> -->
+<!--                     <parameter name="selectionList" value="AUTO"/> -->
                    	 
-                </row>
+<!--                 </row> -->
                 <!--  GAP-GRC74 FIM    -->           
                 <row id="description">
                     <element attribute.idref="description"/>

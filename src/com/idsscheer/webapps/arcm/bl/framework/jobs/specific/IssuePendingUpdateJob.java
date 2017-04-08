@@ -19,8 +19,7 @@ import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.FacadeFactory;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.ValidationException;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjIterator;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjQuery;
-import com.idsscheer.webapps.arcm.common.constants.metadata.CustomEnumerations;
-import com.idsscheer.webapps.arcm.common.constants.metadata.Enumerations;
+import com.idsscheer.webapps.arcm.common.constants.metadata.EnumerationsCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
@@ -32,7 +31,7 @@ import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.J
 
 @CanBeScheduled
 public class IssuePendingUpdateJob extends BaseJob {
-//	public static final String KEY_JOB_NAME = CustomEnumerations.CUSTOM_JOBS.ISSUESPENDING.getPropertyKey();
+//	public static final String KEY_JOB_NAME = EnumerationsCustom.CUSTOM_JOBS.ISSUESPENDING.getPropertyKey();
 	public static final String KEY_JOB_NAME = "teste";
 	private static final com.idsscheer.batchserver.logging.Logger logger = new com.idsscheer.batchserver.logging.Logger();
 
@@ -111,7 +110,7 @@ public class IssuePendingUpdateJob extends BaseJob {
 				}
 
 				
-				if ( issueActionType == CustomEnumerations.ISSUE_ACTION_TYPE.actiontype2 && issuePlannedDate != null ) {
+				if ( issueActionType == EnumerationsCustom.CENUM_IS_ACTION_TYPE.actiontype2 && issuePlannedDate != null ) {
 					logger.info(this.getClass().getName(), "entered condition for action plan issues.");
 					/*
 					 * O status do criador ainda está em preparação
@@ -119,11 +118,11 @@ public class IssuePendingUpdateJob extends BaseJob {
 					 * do sistema.
 					 */
 					if (actualDate.after(issuePlannedDate)
-							&& issueCreatorStatusType == Enumerations.ISSUE_CREATOR_STATUS.IN_CREATION ) {
+							&& issueCreatorStatusType == EnumerationsCustom.CENUM_AP_CREATOR_STATUS.NEW ) {
 
 						logger.info(this.getClass().getName(), "entered condition for issue creator.");
 						iroUpdObj.getAttribute(IIssueAttributeType.ATTR_CREATOR_STATUS).setRawValue(
-								Collections.singletonList(CustomEnumerations.ISSUE_CREATOR_STATUS.PENDING));
+								Collections.singletonList(EnumerationsCustom.CENUM_AP_CREATOR_STATUS.PENDING));
 						logger.info(this.getClass().getName(), "changed information for creator status.");
 						facade.save(iroUpdObj, this.getInternalTransaction(), true);
 						logger.info(this.getClass().getName(), "saved status change for issue creator.");
@@ -135,12 +134,12 @@ public class IssuePendingUpdateJob extends BaseJob {
 						 */
 //					} else if (issueEndDateAction != null) {
 //						if ( actualDate.after(issueEndDateAction)
-//							 && issueOwnerStatusType == Enumerations.ISSUE_OWNER_STATUS.NEW
-//							 && issueCreatorStatusType == Enumerations.ISSUE_CREATOR_STATUS.RELEASED ) {
+//							 && issueOwnerStatusType == EnumerationsCustom.CENUM_AP_OWNER_STATUS.NEW
+//							 && issueCreatorStatusType == EnumerationsCustom.CENUM_AP_CREATOR_STATUS.RELEASED ) {
 //							
 //							logger.info(this.getClass().getName(), "entered condition for issue owner.");
 //							iroUpdObj.getAttribute(IIssueAttributeType.ATTR_OWNER_STATUS)
-//									.setRawValue(Collections.singletonList(CustomEnumerations.ISSUE_OWNER_STATUS.PENDING));
+//									.setRawValue(Collections.singletonList(EnumerationsCustom.CENUM_AP_OWNER_STATUS.PENDING));
 //							logger.info(this.getClass().getName(), "changed information for owner status.");
 //							facade.save(iroUpdObj, this.getInternalTransaction(), true);
 //							logger.info(this.getClass().getName(), "saved status change for owner creator.");
@@ -150,12 +149,12 @@ public class IssuePendingUpdateJob extends BaseJob {
 //					}
 						
 					} if ( actualDate.after(issuePlannedDate)
-							 && issueOwnerStatusType == Enumerations.ISSUE_OWNER_STATUS.NEW
-							 && issueCreatorStatusType == Enumerations.ISSUE_CREATOR_STATUS.RELEASED ) {
+							 && issueOwnerStatusType == EnumerationsCustom.CENUM_AP_OWNER_STATUS.IN_PROGRESS
+							 && issueCreatorStatusType == EnumerationsCustom.CENUM_AP_CREATOR_STATUS.IN_PROGRESS ) {
 							
 							logger.info(this.getClass().getName(), "entered condition for issue owner.");
 							iroUpdObj.getAttribute(IIssueAttributeType.ATTR_OWNER_STATUS)
-									.setRawValue(Collections.singletonList(CustomEnumerations.ISSUE_OWNER_STATUS.PENDING));
+									.setRawValue(Collections.singletonList(EnumerationsCustom.CENUM_AP_OWNER_STATUS.PENDING));
 							logger.info(this.getClass().getName(), "changed information for owner status.");
 							facade.save(iroUpdObj, this.getInternalTransaction(), true);
 							logger.info(this.getClass().getName(), "saved status change for owner creator.");
@@ -193,7 +192,7 @@ public class IssuePendingUpdateJob extends BaseJob {
 	}
 
 	public IEnumerationItem getJobType() {
-		return Enumerations.JOBS.JOBLISTCLEANINGJOB;
+		return EnumerationsCustom.JOBS.JOBLISTCLEANINGJOB;
 	}
 
 	protected void deallocateResources() {

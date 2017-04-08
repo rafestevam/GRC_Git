@@ -7,10 +7,6 @@ import com.idsscheer.webapps.arcm.config.metadata.enumerations.JobEnumerationIte
 
 public class EnumerationsCustom extends Enumerations {
 
-	public EnumerationsCustom() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	/*private static <T extends IEnumeration> T lookupEnumeration(String enumerationId) {
 		return Metadata.getMetadata().getEnumeration(enumerationId);
 	}*/

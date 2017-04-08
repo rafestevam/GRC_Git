@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import org.joda.time.DateTime;
-
 import com.idsscheer.webapps.arcm.bl.exception.ObjectAccessException;
 import com.idsscheer.webapps.arcm.bl.exception.ObjectLockException;
 import com.idsscheer.webapps.arcm.bl.exception.ObjectNotUniqueException;
@@ -23,8 +21,7 @@ import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.FacadeFactory;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.ValidationException;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjIterator;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjQuery;
-import com.idsscheer.webapps.arcm.common.constants.metadata.CustomEnumerations;
-import com.idsscheer.webapps.arcm.common.constants.metadata.Enumerations;
+import com.idsscheer.webapps.arcm.common.constants.metadata.EnumerationsCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
@@ -37,7 +34,7 @@ import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.J
 @CanBeScheduled
 public class IssueSLAUpdateJob extends BaseJob {
 	// public static final String KEY_JOB_NAME =
-	// CustomEnumerations.CUSTOM_JOBS.ISSUESPENDING.getPropertyKey();
+	// EnumerationsCustom.CUSTOM_JOBS.ISSUESPENDING.getPropertyKey();
 
 	private static final boolean DEBUGGER_ON = true;
 	public static final String KEY_JOB_NAME = "teste";
@@ -106,7 +103,7 @@ public class IssueSLAUpdateJob extends BaseJob {
 				/*
 				 * Apenas os "apontamentos" que são plano de ação.
 				 */
-				if ( issueActionType == CustomEnumerations.ISSUE_ACTION_TYPE.actiontype2 ) {
+				if ( issueActionType == EnumerationsCustom.CENUM_IS_ACTION_TYPE.actiontype2 ) {
 					
 					this.displayLog("Este objeto é um plano de ação.");
 					
@@ -117,14 +114,13 @@ public class IssueSLAUpdateJob extends BaseJob {
 					 */
 
 					 if ( actualDate.after(issuefinalDateSLA) && 
-						  (issueCreatorStatusType == Enumerations.ISSUE_CREATOR_STATUS.IN_CREATION || 
-						   issueCreatorStatusType == Enumerations.ISSUE_CREATOR_STATUS.NEW )) {
+						  issueCreatorStatusType == EnumerationsCustom.CENUM_AP_CREATOR_STATUS.NEW ) {
 
 						this.displayLog("este plano de ação deverá ter seu status de criador alternado para pendente.");
 						 
 						iroUpdObj.getAttribute(IIssueAttributeType.ATTR_CREATOR_STATUS).setRawValue(
-								Collections.singletonList(CustomEnumerations.ISSUE_CREATOR_STATUS.PENDING));
-						this.displayLog("alterou o status do plano de ação para " + CustomEnumerations.ISSUE_CREATOR_STATUS.PENDING.toString());
+								Collections.singletonList(EnumerationsCustom.CENUM_AP_CREATOR_STATUS.PENDING));
+						this.displayLog("alterou o status do plano de ação para " + EnumerationsCustom.CENUM_AP_CREATOR_STATUS.PENDING.toString());
 
 						facade.save(iroUpdObj, this.getInternalTransaction(), true);						
 						this.displayLog("facade.save(iroUpdObj, this.getInternalTransaction(), true)");
@@ -175,9 +171,9 @@ public class IssueSLAUpdateJob extends BaseJob {
 							 * Apenas o que é apontamento ("actiontype1"). Não entram os planos de ação 
 							 * que possam estar relacionados a esteplano de ação.
 							 */  
-							if ( eiRelIssueAction == CustomEnumerations.ISSUE_ACTION_TYPE.actiontype1 ) {
+							if ( eiRelIssueAction == EnumerationsCustom.CENUM_IS_ACTION_TYPE.actiontype1 ) {
 								
-								this.displayLog("eiRelIssueAction == CustomEnumerations.ISSUE_ACTION_TYPE.actiontype1");
+								this.displayLog("eiRelIssueAction == EnumerationsCustom.CENUM_IS_ACTION_TYPE.actiontype1");
 								
 								// Cria um enumeration attribute para o creator status do apontamento.
 								IEnumAttribute eaRelIssueCreatorStatus = objUpdRelIssue.getAttribute( IIssueAttributeType.ATTR_CREATOR_STATUS );
@@ -195,14 +191,13 @@ public class IssueSLAUpdateJob extends BaseJob {
 								IEnumerationItem eiRelIssueOwnerStatus = ARCMCollections.extractSingleEntry(eaRelIssueOwnerStatus.getRawValue(), true);
 								this.displayLog("IEnumerationItem eiRelIssueOwnerStatus = ARCMCollections.extractSingleEntry(eaRelIssueOwnerStatus.getRawValue(), true)");
 								
-								if ( eiRelIssueCreatorStatus == Enumerations.ISSUE_CREATOR_STATUS.RELEASED && 
-										eiRelIssueOwnerStatus == Enumerations.ISSUE_OWNER_STATUS.NEW || 
-										eiRelIssueOwnerStatus == Enumerations.ISSUE_OWNER_STATUS.IN_PROGRESS ) {
+								if ( eiRelIssueCreatorStatus == EnumerationsCustom.CENUM_AP_CREATOR_STATUS.IN_PROGRESS && 
+										eiRelIssueOwnerStatus == EnumerationsCustom.CENUM_AP_OWNER_STATUS.IN_PROGRESS ) {
 
 									this.displayLog("o apontamento relacionado a este plano de ação deverá alternar o seu status de proprietário para PENDENTE.");
 									
 									objUpdRelIssue.getAttribute(IIssueAttributeType.ATTR_OWNER_STATUS).setRawValue(
-											Collections.singletonList(CustomEnumerations.ISSUE_OWNER_STATUS.PENDING));
+											Collections.singletonList(EnumerationsCustom.CENUM_AP_OWNER_STATUS.PENDING));
 
 									facade.save(objUpdRelIssue, this.getInternalTransaction(), true);
 
@@ -248,7 +243,7 @@ public class IssueSLAUpdateJob extends BaseJob {
 	}
 
 	public IEnumerationItem getJobType() {
-		return Enumerations.JOBS.JOBLISTCLEANINGJOB;
+		return EnumerationsCustom.JOBS.JOBLISTCLEANINGJOB;
 	}
 
 	protected void deallocateResources() {
