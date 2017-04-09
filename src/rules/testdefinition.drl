@@ -75,7 +75,8 @@ rule "define all standard attributes editable [I,V]"
 #		set "manager_group"         editable
 		set "startdate"             editable
 		set "isfollowup"            editable
-		set "name"                  editable
+		set "name"                  editable		
+		set "origemteste"           editable 
 		set "orgunit"               editable
 		set "test_nature"           editable
 		set "testextend"            editable
