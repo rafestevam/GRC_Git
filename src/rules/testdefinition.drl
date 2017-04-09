@@ -68,11 +68,11 @@ rule "define all standard attributes editable [I,V]"
 		set "duration"              editable
 		#set "enddate"               editable
 		set "frequency"             editable
-		set "event_driven_allowed"  editable
-		#set "control_period_offset" editable
+#		set "event_driven_allowed"  editable
+#		set "control_period_offset" editable
 		set "owner_group"           editable
 		set "reviewer_group"        editable
-		#set "manager_group"         editable
+#		set "manager_group"         editable
 		set "startdate"             editable
 		set "isfollowup"            editable
 		set "name"                  editable		
@@ -106,10 +106,10 @@ rule "mark_mandatory_fields_[I,V]"
 
 	then
 		set "reviewer_group"        mandatory
-		set "control_period"        mandatory
+#		set "control_period"        mandatory
 		set "testtype"              mandatory
 		set "owner_group"           mandatory
-		set "control_period_offset" mandatory
+#		set "control_period_offset" mandatory
 		set "isfollowup"            mandatory
 		set "testingsteps"          mandatory
 		set "test_nature"           mandatory
@@ -117,31 +117,31 @@ rule "mark_mandatory_fields_[I,V]"
 		set "duration"              mandatory
 		set "testextend"            mandatory
 		set "frequency"             mandatory
-		#set "event_driven_allowed" mandatory
+#		set "event_driven_allowed"  mandatory
 		set "startdate"             mandatory
 		set "name"                  mandatory
 		set "origemteste"           mandatory
 
 end
 
-#rule "testcase_frequency=none --> event_driven_allowed:=true [I,V]"
+rule "testcase_frequency=none --> event_driven_allowed:=true [I,V]"
 
-#	salience 10200
-#	no-loop true
+	salience 10200
+	no-loop true
 
-#	when
-#	    value comparison fulfilled: ":transient:" attr_value "frequency" "CONTAINS" value "none"
+	when
+	    value comparison fulfilled: ":transient:" attr_value "frequency" "CONTAINS" value "none"
 
-#	then
+	then
 #		set "event_driven_allowed" to value "true"
 #		set "event_driven_allowed" not_mandatory
 #		set "event_driven_allowed" readonly
-#		# deactivated for GW, CABI - 27.3.12
-#		#set "testtype" to value "testofeffectiveness"
-#		#set "testtype" not_mandatory
-#		#set "testtype" readonly
-#
-#end
+		# deactivated for GW, CABI - 27.3.12
+		#set "testtype" to value "testofeffectiveness"
+		#set "testtype" not_mandatory
+		#set "testtype" readonly
+
+end
 
 
 rule "startdate_invalid_[V]"

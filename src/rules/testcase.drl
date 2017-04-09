@@ -579,3 +579,5 @@ rule "set reviewer_status [I,V]"
     #	set "reviewer_status"   mandatory   	
 		set "origemteste"       not_mandatory
 end
+
+##############Customize GRC52 FIM
