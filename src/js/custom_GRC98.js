@@ -1,7 +1,11 @@
-$(document).ready( function(){
+//$(document).ready( function(){
+$(document).one('ready', function(){
 
+/*
 	var ra_residual1line = $('#ra_residual1line').val();
 	var ra_result = $('#ra_result').val();
+	
+	debugger;
 	
 	if(ra_result === undefined || ra_result === ''){
 		console.log('RA_RESULT É VAZIO')
@@ -13,16 +17,20 @@ $(document).ready( function(){
 		aam_objectcommand('customcachersk');
 		return;
 	}
-
+*/
 
 	var risk_id = $('#risk_id').val();
 	var risk_name = $('#name').val();
 	
 	$('#tr_residualrisk_id').find("td.TEXTFIELD_WRITE").text(risk_id);
 	$('#tr_residualrisk_name').find("td.TEXTFIELD_WRITE").text(risk_name);
+	
+	debugger;
+		
+	aam_objectcommand('customcachersk');
+	return;
 
 })
-
 
 /*
 $(document).ready( function(){

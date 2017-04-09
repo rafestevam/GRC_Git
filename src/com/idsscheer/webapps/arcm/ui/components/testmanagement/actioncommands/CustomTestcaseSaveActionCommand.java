@@ -32,6 +32,7 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 	private String view_testcase_obj_id = "ta_id";
 	private String view_testcase_version_number = "ta_version_number";*/
 	private String riscoPotencial = "";
+	private String fernanda = "";
 	final Logger log = Logger.getLogger(CustomTestcaseSaveActionCommand.class.getName());
 
 	protected void addForwardDialog() {
@@ -42,6 +43,15 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 		
 		IAppObj currAppObj = this.formModel.getAppObj();
 		IAppObj currParentCtrlObj = this.parentControl(currAppObj);
+		String ownerStatus = this.requestContext.getParameter(ITestcaseAttributeType.STR_OWNER_STATUS);
+		
+		if(ownerStatus.equals("3"))
+			this.fernanda = "effective";
+		
+		if(ownerStatus.equals("4"))
+			this.fernanda = "noneffective";
+
+		log.info("Status de Proprietário: " + ownerStatus);
 		
 		try{
 			
@@ -198,7 +208,19 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 								cntInef3Line += 1;
 								log.info("TC ineficaz 3 linha: " + String.valueOf(cntInef3Line));
 							}
-						}	
+						}
+						if(ownerStatusItem.getId().equals("new")){
+							if(this.fernanda.equals("noneffective")){
+								if(this.testDefClass(tstDefObj).equals("1linhadefesa")){
+									cntInef2Line += 1;
+									log.info("TC ineficaz 2 linha: " + String.valueOf(cntInef2Line));
+								}
+								if(this.testDefClass(tstDefObj).equals("2linhadefesa")){
+									cntInef3Line += 1;
+									log.info("TC ineficaz 3 linha: " + String.valueOf(cntInef3Line));
+								}
+							}
+						}
 					}
 					
 				}
@@ -232,7 +254,7 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			log.info("Calculando Residual Final");
 			String riskResidualFinal = this.riskResidualFinal(this.riscoPotencial, riskClassFinal);
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue(riskResidualFinal);
-			log.info("Classificacao Res Final: " + riskResidualFinal);
+			log.info("Classificacao Res Final: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).getRawValue());
 			log.info("Residual Final Calculado...");
 			
 			log.info("Salvando Risco");

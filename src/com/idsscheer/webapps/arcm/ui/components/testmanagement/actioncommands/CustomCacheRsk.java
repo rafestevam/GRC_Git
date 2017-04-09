@@ -1,9 +1,15 @@
 package com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands;
 
+
+import org.apache.log4j.Logger;
+
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.ui.framework.actioncommands.object.BaseCacheActionCommand;
 
 public class CustomCacheRsk extends BaseCacheActionCommand {
+	
+	final Logger log = Logger.getLogger(CustomCacheRsk.class.getName());
+	//final Logger log = new Logger();
 	
 	protected void afterExecute(){
 		//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "TAB LOADED", new String[] { getStringRepresentation(this.formModel.getAppObj()) });
@@ -12,42 +18,67 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 		String riskControl1line;
 		String riskControl2line;
 		String riskControl3line;
+		String riskControlfinal;
 		
 		riskPotencial = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).getRawValue();
 		if(riskPotencial == null)
 			riskPotencial = "";
+		log.info("Risco Potencial: " + riskPotencial);
 		
-		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).isEmpty())
+		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).isEmpty()){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).setRawValue("Não Avaliado");
+			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).setRawValue("Não Avaliado");
+			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).setRawValue("Não Avaliado");
+			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).setRawValue("Não Avaliado");
+			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue("Não Avaliado");
+		}
 		
-		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).isEmpty()){
-			riskControl1line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).getRawValue();
-			if(riskControl1line == null)
-				riskControl1line = "";
+//		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).isEmpty()){
+		riskControl1line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).getRawValue();
+		if(riskControl1line == null)
+			riskControl1line = "";
+		if(!riskControl1line.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).setRawValue(
 					this.riskResidualFinal(riskPotencial, riskControl1line)
 			);
+			log.info("Risco Residual 1a Linha: " + this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).getRawValue());
 		}
+//		}
 		
-		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).isEmpty()){
-			riskControl2line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
-			if(riskControl2line == null)
-				riskControl2line = "";
+//		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).isEmpty()){
+		riskControl2line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
+		if(riskControl2line == null)
+			riskControl2line = "";
+		if(!riskControl2line.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).setRawValue(
 					this.riskResidualFinal(riskPotencial, riskControl2line)
 			);
+			log.info("Risco Residual 2a Linha: " + this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).getRawValue());
 		}
+//		}
 		
-		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).isEmpty()){
-			riskControl3line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue();
-			if(riskControl3line == null)
-				riskControl3line = "";
+//		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).isEmpty()){
+		riskControl3line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue();
+		if(riskControl3line == null)
+			riskControl3line = "";
+		if(!riskControl3line.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).setRawValue(
 					this.riskResidualFinal(riskPotencial, riskControl3line)
 			);
+			log.info("Risco Residual 3a Linha: " + this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).getRawValue());
+		}
+//		}
+		riskControlfinal = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue();
+		if(riskControlfinal == null)
+			riskControlfinal = "";
+		if(!riskControlfinal.equals("")){
+			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue(
+					this.riskResidualFinal(riskPotencial, riskControlfinal)
+			);
+			log.info("Risco Residual Final: " + this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).getRawValue());
 		}
 		
-		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).isEmpty())
+		/*if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).isEmpty())
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).setRawValue("Não Avaliado");
 		
 		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).isEmpty())
@@ -57,7 +88,7 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).setRawValue("Não Avaliado");
 		
 		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).isEmpty())
-			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue("Não Avaliado");
+			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue("Não Avaliado");*/
 		
 		/*
 		IUIEnvironment formEnv = this.environment;
@@ -172,6 +203,9 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 		
 		if(riskPotencial.equals("Médio") && riskControlFinal.equals("Baixo"))
 			riskResidualReturn = "Baixo";
+		
+		log.info("Avaliação - Risco Potencial: " + riskPotencial);
+		log.info("Avaliação - Controle: " + riskControlFinal);
 		
 		return riskResidualReturn;
 		
