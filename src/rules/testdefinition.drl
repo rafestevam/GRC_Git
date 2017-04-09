@@ -64,25 +64,26 @@ rule "define all standard attributes editable [I,V]"
 		set "obj_id"                editable
 		set "obj_type"              editable
 		set "versions"              editable
-		set "control_period"        editable
+		#set "control_period"        editable
 		set "duration"              editable
-		set "enddate"               editable
+		#set "enddate"               editable
 		set "frequency"             editable
 		set "event_driven_allowed"  editable
-		set "control_period_offset" editable
+		#set "control_period_offset" editable
 		set "owner_group"           editable
 		set "reviewer_group"        editable
-		set "manager_group"         editable
+		#set "manager_group"         editable
 		set "startdate"             editable
 		set "isfollowup"            editable
-		set "name"                  editable
+		set "name"                  editable		
+		set "origemteste"           editable 
 		set "orgunit"               editable
 		set "test_nature"           editable
 		set "testextend"            editable
 		set "testingsteps"          editable
 		set "testtype"              editable
-		set "walkthroughCounter"    editable
-		set "walkthroughName"       editable
+		#set "walkthroughCounter"    editable
+		#set "walkthroughName"       editable
 		set "aris_change_date"      editable
 		set "change_date"           editable
 		set "change_type"           editable
@@ -116,30 +117,31 @@ rule "mark_mandatory_fields_[I,V]"
 		set "duration"              mandatory
 		set "testextend"            mandatory
 		set "frequency"             mandatory
-		set "event_driven_allowed"  mandatory
+		#set "event_driven_allowed" mandatory
 		set "startdate"             mandatory
 		set "name"                  mandatory
+		set "origemteste"           mandatory
 
 end
 
-rule "testcase_frequency=none --> event_driven_allowed:=true [I,V]"
+#rule "testcase_frequency=none --> event_driven_allowed:=true [I,V]"
 
-	salience 10200
-	no-loop true
+#	salience 10200
+#	no-loop true
 
-	when
-	    value comparison fulfilled: ":transient:" attr_value "frequency" "CONTAINS" value "none"
+#	when
+#	    value comparison fulfilled: ":transient:" attr_value "frequency" "CONTAINS" value "none"
 
-	then
-		set "event_driven_allowed" to value "true"
-		set "event_driven_allowed" not_mandatory
-		set "event_driven_allowed" readonly
-		# deactivated for GW, CABI - 27.3.12
-		#set "testtype" to value "testofeffectiveness"
-		#set "testtype" not_mandatory
-		#set "testtype" readonly
-
-end
+#	then
+#		set "event_driven_allowed" to value "true"
+#		set "event_driven_allowed" not_mandatory
+#		set "event_driven_allowed" readonly
+#		# deactivated for GW, CABI - 27.3.12
+#		#set "testtype" to value "testofeffectiveness"
+#		#set "testtype" not_mandatory
+#		#set "testtype" readonly
+#
+#end
 
 
 rule "startdate_invalid_[V]"

@@ -158,7 +158,9 @@
         <enumitem id="issue" value="3" image="iconlib/icons/states/state_issue_16.png"/>
         <enumitem id="deactivated" value="4" formRelevant="false"  image="iconlib/icons/states/state_measure_deactivated_16.png"/>
         <enumitem id="deficiency" value="2" image="iconlib/icons/states/state_deficiency_16.png"/>
-    </enum>          
+    </enum>
+    
+             
 <!-- Final GAP GRC52 -->
 
 <!-- Inicial GAP GRC74 -->
