@@ -10,9 +10,11 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 	
 	final Logger log = Logger.getLogger(CustomCacheRsk.class.getName());
 	//final Logger log = new Logger();
-	
+
 	protected void afterExecute(){
+//	protected void assumeData(String[] p_excludeParameters){
 		//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "TAB LOADED", new String[] { getStringRepresentation(this.formModel.getAppObj()) });
+//		super.assumeData(p_excludeParameters);
 		
 		String riskPotencial;
 		String riskControl1line;
@@ -35,7 +37,7 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 		
 //		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).isEmpty()){
 		riskControl1line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).getRawValue();
-		if(riskControl1line == null)
+		if(riskControl1line == null || riskControl1line.equals("Não Avaliado"))
 			riskControl1line = "";
 		if(!riskControl1line.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL1LINE).setRawValue(
@@ -47,7 +49,7 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 		
 //		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).isEmpty()){
 		riskControl2line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
-		if(riskControl2line == null)
+		if(riskControl2line == null || riskControl2line.equals("Não Avaliado"))
 			riskControl2line = "";
 		if(!riskControl2line.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL2LINE).setRawValue(
@@ -59,7 +61,7 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 		
 //		if(this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).isEmpty()){
 		riskControl3line = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue();
-		if(riskControl3line == null)
+		if(riskControl3line == null || riskControl3line.equals("Não Avaliado"))
 			riskControl3line = "";
 		if(!riskControl3line.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUAL3LINE).setRawValue(
@@ -69,7 +71,7 @@ public class CustomCacheRsk extends BaseCacheActionCommand {
 		}
 //		}
 		riskControlfinal = this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue();
-		if(riskControlfinal == null)
+		if(riskControlfinal == null || riskControlfinal.equals("Não Avaliado"))
 			riskControlfinal = "";
 		if(!riskControlfinal.equals("")){
 			this.formModel.getAppObj().getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue(
