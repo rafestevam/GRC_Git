@@ -226,7 +226,10 @@ rule "GRC98_set_custom_controlexecstatus_visible[I,V]"
 	
 	then
 		set "custom_controlexecstatus" readonly
-		
+		set "activities"               invisible
+		set "selectivity"              invisible
+		set "result_format"            invisible
+
 end
 
 #rule "GRC98_set_custom_controlexecstatus_editable[I,V]"
