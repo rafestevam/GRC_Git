@@ -45,49 +45,57 @@ $(function(){
 		ra_residualfinal = 'Nao Avaliado';
 	}
 	
-	$('#tr_residualra_residual1line').find("td.TEXTFIELD_READ").text(ra_residual1line);
-	$('#tr_residualra_residual2line').find("td.TEXTFIELD_READ").text(ra_residual2line);
-	$('#tr_residualra_residual3line').find("td.TEXTFIELD_READ").text(ra_residual3line);
-	$('#tr_residualra_residualfinal').find("td.TEXTFIELD_READ").text(ra_residualfinal);
+	$('#tr_residualra_residual1line').find("td.TEXTFIELD_READ").text(unescape(ra_residual1line));
+	$('#tr_residualra_residual2line').find("td.TEXTFIELD_READ").text(unescape(ra_residual2line));
+	$('#tr_residualra_residual3line').find("td.TEXTFIELD_READ").text(unescape(ra_residual3line));
+	$('#tr_residualra_residualfinal').find("td.TEXTFIELD_READ").text(unescape(ra_residualfinal));
 	
 
 });
 
 function classRiskRes(riskPotencial, control){
-	if(riskPotencial === 'Muito Alto' && control === 'Muito Alto'){
+	var intControl       = escape(control);
+	var intRiskPotencial = escape(riskPotencial);
+	
+	var cMuitoAlto = escape("Muito Alto");
+	var cAlto      = escape("Alto");
+	var cMedio     = "M%E9dio";
+	var cBaixo     = escape("Baixo");
+	
+	if(intRiskPotencial === cMuitoAlto && intControl === cMuitoAlto){
 		return 'Muito Alto';
 	}
-	if(riskPotencial === 'Muito Alto' && control === 'Alto'){
+	if(intRiskPotencial === cMuitoAlto && intControl === cAlto){
 		return 'Muito Alto';
 	}
-	if(riskPotencial === 'Muito Alto' && control === 'Médio'){
+	if(intRiskPotencial === cMuitoAlto && intControl === cMedio){
 		return 'Alto';
 	}
-	if(riskPotencial === 'Muito Alto' && control === 'Baixo'){
-		return 'Médio';
+	if(intRiskPotencial === cMuitoAlto && intControl === cBaixo){
+		return 'M&eacute;dio';
 	}
-	if(riskPotencial === 'Alto' && control === 'Muito Alto'){
+	if(intRiskPotencial === cAlto && intControl === cMuitoAlto){
 		return 'Alto';
 	}
-	if(riskPotencial === 'Alto' && control === 'Alto'){
+	if(intRiskPotencial === cAlto && intControl === cAlto){
 		return 'Alto';
 	}
-	if(riskPotencial === 'Alto' && control === 'Médio'){
-		return 'Médio';
+	if(intRiskPotencial === cAlto && intControl === cMedio){
+		return cMedio;
 	}
-	if(riskPotencial === 'Alto' && control === 'Baixo'){
-		return 'Médio';
+	if(intRiskPotencial === cAlto && intControl === cBaixo){
+		return cMedio;
 	}
-	if(riskPotencial === 'Médio' && control === 'Muito Alto'){
-		return 'Médio';
+	if(intRiskPotencial === cMedio && intControl === cMuitoAlto){
+		return cMedio;
 	}
-	if(riskPotencial === 'Médio' && control === 'Alto'){
-		return 'Médio';
+	if(intRiskPotencial === cMedio && intControl === cAlto){
+		return cMedio;
 	}
-	if(riskPotencial === 'Médio' && control === 'Médio'){
-		return 'Médio';
+	if(intRiskPotencial === cMedio && intControl === cMedio){
+		return cMedio;
 	}
-	if(riskPotencial === 'Médio' && control === 'Baixo'){
+	if(intRiskPotencial === cMedio && intControl === cBaixo){
 		return 'Baixo';
 	}
 }

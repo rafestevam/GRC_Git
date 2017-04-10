@@ -30,13 +30,21 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 	private String view_ce_obj_id = "obj_id";
 	private String view_ce_version_number = "version_number";*/
 	private String riscoPotencial = "";
+	private String currStatus = "";
 	final Logger log = Logger.getLogger(CustomSaveCEActionCommand.class.getName());
 
 	protected void afterExecute(){
 		
 		IAppObj currAppObj = this.formModel.getAppObj();
 		IAppObj currParentCtrlObj = this.parentControl(currAppObj);
+		String ceStatus = this.requestContext.getParameter(IControlexecutionAttributeTypeCustom.STR_CUSTOMCTRLEXECSTATUS);
 		
+		if(ceStatus.equals("1"))
+			this.currStatus = "effective";
+		
+		if(ceStatus.equals("2"))
+			this.currStatus = "ineffective";
+			
 		try{
 		
 			IAppObj riskParentObj = this.getRiskFromControl(currParentCtrlObj);
@@ -164,6 +172,9 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 		double countTotal = 0;
 		double count1line = 0;
 		
+		if(this.currStatus.equals("ineffective"))
+			count1line += 1;
+		
 		try{
 			
 			IAppObjFacade riskFacade = this.environment.getAppObjFacade(ObjectType.RISK);
@@ -184,7 +195,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 						IEnumerationItem statusItem = ARCMCollections.extractSingleEntry(statusAttr.getRawValue(), true);
 						if(statusItem.getId().equals("ineffective")){
 							count1line += 1;
-						}	
+						}
 					}
 					
 				}
@@ -193,6 +204,9 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			
 			double risk1line = ( count1line / countTotal );
 			String riskClass1line = this.riskClassification(risk1line);
+			log.info("Controles Inefetivos: " + String.valueOf(count1line));
+			log.info("Total de Controles: " + String.valueOf(countTotal));
+			log.info("Ponderação: " + String.valueOf(risk1line));
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).setRawValue(riskClass1line);
 			
 			String riskClass2line = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
