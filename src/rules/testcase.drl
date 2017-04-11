@@ -161,6 +161,7 @@ rule "tester set effectiveness design [I,V]"
 	      
 		 value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective"
 
+
         value comparison fulfilled: ":transient:" attr_value "testtype" "CONTAINS" value "testofdesign"
         value comparison fulfilled: ":transient:" attr_value "testtype" "CONTAINS NOT" value "testofeffectiveness"
 
@@ -183,7 +184,7 @@ rule "tester set effectiveness control [I,V]"
 
 	      
 		value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective" 
-		
+
 		
 		value comparison fulfilled: ":transient:" attr_value "testtype" "CONTAINS NOT" value "testofdesign"
         value comparison fulfilled: ":transient:" attr_value "testtype" "CONTAINS" value "testofeffectiveness"
@@ -205,7 +206,8 @@ rule "tester set effectiveness both [I,V]"
 	    ( is in workflow state "PREPARED" AND
 	      user is executing job with id "eventImportJob" )
 
-		value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective" 
+		value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective"
+ 
 		
 		
         value comparison fulfilled: ":transient:" attr_value "testtype" "CONTAINS" value "testofdesign"
@@ -229,7 +231,7 @@ rule "Reset effectiveness [I,V]"
           user is executing job with id "eventImportJob" )
 
         value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS NOT" value "noneffective" 
-        
+
 
 	then
 		set at multi enum "effectiveness" item "design" to boolean_value "false"
@@ -318,7 +320,8 @@ rule "tester operative description mandatory if 'noneffective' [I,V]"
 	    ( is in workflow state "PREPARED" AND
 	      user is executing job with id "eventImportJob" )
       
-		value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective" 
+		value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective"
+ 
 		
 
 		# condition must both consider the values of "testtype" and "effectiveness" because the consequences of rules
@@ -498,6 +501,7 @@ rule "set effectiveness visible for noneffective testcases [I,V]"
 	when
  	
 	    value comparison fulfilled: ":transient:" attr_value "owner_status" "CONTAINS" value "noneffective" 
+
 	    
  	    
 		( value comparison fulfilled: ":transient:" attr_value "testtype" "CONTAINS" value "testofdesign" OR
