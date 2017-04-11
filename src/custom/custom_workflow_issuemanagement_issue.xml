@@ -53,7 +53,7 @@
 
         <state id="openForCreation">
 <!--             <attribute id="creator_status" value="open"/> -->
-            <attribute id="custom_is_creator_status" value="please_select, new"/>
+            <attribute id="custom_is_creator_status" value="new"/>
 <!--             <attribute id="custom_ap_creator_status" value="new"/> -->
             <transitions>
                 <update to.state.id="openForCreation" chain.id="creationInPreparation">
@@ -187,8 +187,11 @@
 <!--                     <attribute.change id="owner_status" to="open_for_execution"/> -->
                 </update>
                 <update to.state.id="apCreatorOnHold" chain.id="onHold">
-                	<attribute.change id="custom_ap_owner_status"   to="pending"/>
+                	<attribute.change id="custom_ap_creator_status"   to="pending"/>
 <!--                     <attribute.change id="owner_status" to="on_hold"/> -->
+                </update>
+                <update to.state.id="apOpenForExecution" chain.id="creationReleased">
+                	<attribute.change id="custom_ap_creator_status"   to="in_progress"/>
                 </update>
 <!--                 <update to.state.id="apOpenForReview" chain.id="closedByOwner"> -->
 <!--                 	<attribute.change id="custom_ap_owner_status"   to="to_be_reviewed"/> -->

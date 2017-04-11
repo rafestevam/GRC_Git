@@ -14,6 +14,7 @@ import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IControlAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskAttributeTypeCustom;
+import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.ITestCaseAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.ITestcaseAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.ITestdefinitionAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.common.util.ARCMCollections;
@@ -33,17 +34,26 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 	private String view_testcase_version_number = "ta_version_number";*/
 	private String riscoPotencial = "";
 	private String fernanda = "";
+	private String origemTeste = "";
 	final Logger log = Logger.getLogger(CustomTestcaseSaveActionCommand.class.getName());
 
 	protected void addForwardDialog() {
+		this.executeCalculation();
 		super.addForwardDialog();
 	}
 	
-	protected void afterExecute(){
+	//protected void afterExecute(){
+	private void executeCalculation(){
 		
 		IAppObj currAppObj = this.formModel.getAppObj();
 		IAppObj currParentCtrlObj = this.parentControl(currAppObj);
 		String ownerStatus = this.requestContext.getParameter(ITestcaseAttributeType.STR_OWNER_STATUS);
+		//this.origemTeste = this.requestContext.getParameter(ITestCaseAttributeTypeCustom.STR_ORIGEMTESTE);
+		
+		IEnumAttribute origemTesteAttr = currAppObj.getAttribute(ITestCaseAttributeTypeCustom.ATTR_ORIGEMTESTE);
+		IEnumerationItem origemTeste = ARCMCollections.extractSingleEntry(origemTesteAttr.getRawValue(), true);
+		this.origemTeste = origemTeste.getId();
+		log.info("Origem do Teste: " + this.origemTeste);
 		
 		if(ownerStatus.equals("3"))
 			this.fernanda = "effective";
@@ -227,7 +237,33 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 				
 			}
 			
-			String riskClass1line = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).getRawValue();
+			String riskClassFinal = "";
+			
+			if(this.origemTeste.equals("1linhadefesa")){
+				double risk2line = ( cntInef2Line / cntTotal2Line );
+				log.info("Ponderacao 2 linha: " + String.valueOf(risk2line));
+				String riskClass2line = this.riskClassification(risk2line);
+				log.info("Classificacao 2 linha: " + riskClass2line);
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).setRawValue(riskClass2line);
+				log.info("Classificacao 2 linha - ATTR: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue());
+				riskClassFinal = riskClass2line;
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+				log.info("Classificacao Final - ATTR: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue());
+			}
+			
+			if(this.origemTeste.equals("2linhadefesa")){
+				double risk3line = ( cntInef3Line / cntTotal3Line );
+				log.info("Ponderacao 3 linha: " + String.valueOf(risk3line));
+				String riskClass3line = this.riskClassification(risk3line);
+				log.info("Classificacao 3 linha: " + riskClass3line);
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).setRawValue(riskClass3line);
+				log.info("Classificacao 3 linha - ATTR: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue());
+				riskClassFinal = riskClass3line;
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+				log.info("Classificacao Final - ATTR: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue());
+			}
+			
+			/*String riskClass1line = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).getRawValue();
 			if(riskClass1line == null)
 				riskClass1line = "";
 			
@@ -249,7 +285,7 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			String riskClassFinal = this.riskFinalClassification(riskClass1line, riskClass2line, riskClass3line);
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
 			log.info("Classificacao Ctrl Final: " + riskClassFinal);
-			log.info("Amb Controle Final Calculado...");
+			log.info("Amb Controle Final Calculado...");*/
 			
 			log.info("Calculando Residual Final");
 			String riskResidualFinal = this.riskResidualFinal(this.riscoPotencial, riskClassFinal);

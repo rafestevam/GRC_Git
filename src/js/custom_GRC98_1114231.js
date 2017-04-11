@@ -8,17 +8,20 @@ $(function(){
 	$('#tr_residualrisk_id').find("td.TEXTFIELD_WRITE").text(risk_id);
 	$('#tr_residualrisk_name').find("td.TEXTFIELD_WRITE").text(risk_name);
 	
+	if($('#ra_result').val() === ''){
+		$('#tr_residualra_result').find("td.TEXTFIELD_READ").text(unescape('N%E3o%20Avaliado'));
+	}
 	if($('#ra_control1line').val() === ''){
-		$('#tr_residualra_control1line').find("td.TEXTFIELD_READ").text('Não Avaliado');
+		$('#tr_residualra_control1line').find("td.TEXTFIELD_READ").text(unescape('N%E3o%20Avaliado'));
 	}
 	if($('#ra_control2line').val() === ''){
-		$('#tr_residualra_control2line').find("td.TEXTFIELD_READ").text('Não Avaliado');
+		$('#tr_residualra_control2line').find("td.TEXTFIELD_READ").text(unescape('N%E3o%20Avaliado'));
 	}
 	if($('#ra_control3line').val() === ''){
-		$('#tr_residualra_control3line').find("td.TEXTFIELD_READ").text('Não Avaliado');
+		$('#tr_residualra_control3line').find("td.TEXTFIELD_READ").text(unescape('N%E3o%20Avaliado'));
 	}
 	if($('#ra_controlfinal').val() === ''){
-		$('#tr_residualra_controlfinal').find("td.TEXTFIELD_READ").text('Não Avaliado');
+		$('#tr_residualra_controlfinal').find("td.TEXTFIELD_READ").text(unescape('N%E3o%20Avaliado'));
 	}
 	
 	var ra_result = $('#ra_result').val();
@@ -33,16 +36,16 @@ $(function(){
 	var ra_residualfinal = classRiskRes(ra_result, ra_controlfinal);
 	
 	if(ra_residual1line === undefined){
-		ra_residual1line = 'Nao Avaliado';
+		ra_residual1line = 'N%E3o%20Avaliado';
 	}
 	if(ra_residual2line === undefined){
-		ra_residual2line = 'Nao Avaliado';
+		ra_residual2line = 'N%E3o%20Avaliado';
 	}
 	if(ra_residual3line === undefined){
-		ra_residual3line = 'Nao Avaliado';
+		ra_residual3line = 'N%E3o%20Avaliado';
 	}
 	if(ra_residualfinal === undefined){
-		ra_residualfinal = 'Nao Avaliado';
+		ra_residualfinal = 'N%E3o%20Avaliado';
 	}
 	
 	$('#tr_residualra_residual1line').find("td.TEXTFIELD_READ").text(unescape(ra_residual1line));
