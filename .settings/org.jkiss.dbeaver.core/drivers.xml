@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<drivers>
+	<provider id="db2"/>
+	<provider id="exasol"/>
+	<provider id="generic"/>
+	<provider id="mysql"/>
+	<provider id="oracle"/>
+	<provider id="postgresql">
+		<driver id="postgres-jdbc" custom="false" embedded="false" name="PostgreSQL" class="org.postgresql.Driver" url="jdbc:postgresql://{host}[:{port}]/[{database}]" port="5432" description="PostgreSQL standard driver">
+			<library type="jar" path="maven:/org.postgresql:postgresql:{.*jdbc4|.*jre7}" custom="false">
+				<file id="org.postgresql:postgresql" version="42.0.0.jre7" path="${drivers_home}\maven\maven-central\org.postgresql\postgresql-42.0.0.jre7.jar"/>
+			</library>
+		</driver>
+	</provider>
+</drivers>

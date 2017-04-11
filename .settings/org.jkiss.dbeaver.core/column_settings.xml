@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+	<item id="NodeList/PostgreSchema">
+		<column name="Database" visible="true" order="0" width="62"/>
+		<column name="Name" visible="true" order="1" width="143"/>
+		<column name="Owner" visible="false" order="2" width="0"/>
+	</item>
+	<item id="NodeList/PostgreTable/PostgreTableRegular">
+		<column name="Table Name" visible="true" order="0" width="180"/>
+		<column name="ID" visible="true" order="1" width="47"/>
+		<column name="Owner" visible="true" order="2" width="49"/>
+		<column name="Description" visible="true" order="3" width="74"/>
+		<column name="Tablespace" visible="true" order="4" width="73"/>
+		<column name="Row Count Estimate" visible="true" order="5" width="121"/>
+		<column name="Super Tables" visible="false" order="6" width="0"/>
+		<column name="Sub Tables" visible="false" order="7" width="0"/>
+		<column name="Has Oids" visible="false" order="8" width="0"/>
+	</item>
+	<item id="NodeList/PostgreTableColumn">
+		<column name="Column Name" visible="true" order="0" width="195"/>
+		<column name="#" visible="true" order="1" width="27"/>
+		<column name="Data type" visible="true" order="2" width="64"/>
+		<column name="Length" visible="true" order="3" width="51"/>
+		<column name="Precision" visible="true" order="4" width="62"/>
+		<column name="Scale" visible="true" order="5" width="41"/>
+		<column name="Not Null" visible="true" order="6" width="59"/>
+		<column name="Default" visible="true" order="7" width="52"/>
+		<column name="Description" visible="true" order="8" width="74"/>
+	</item>
+	<item id="NodeList/PostgreTableConstraint/PostgreTableConstraintColumn">
+		<column name="Name" visible="true" order="0" width="149"/>
+		<column name="Owner" visible="true" order="1" width="65"/>
+		<column name="Ordinal Position" visible="false" order="2" width="0"/>
+		<column name="Type" visible="true" order="2" width="82"/>
+		<column name="Expression" visible="true" order="3" width="70"/>
+	</item>
+	<item id="projectExplorer">
+		<column name="Name" visible="true" order="0" width="112"/>
+		<column name="DataSource" visible="true" order="1" width="172"/>
+		<column name="Preview" visible="false" order="2" width="0"/>
+		<column name="Size" visible="false" order="3" width="0"/>
+		<column name="Modified" visible="false" order="4" width="0"/>
+		<column name="Type" visible="false" order="5" width="0"/>
+	</item>
+	<item id="scriptSelectorViewer">
+		<column name="Script" visible="true" order="0" width="114"/>
+		<column name="Time" visible="true" order="1" width="133"/>
+		<column name="Info" visible="true" order="2" width="1600"/>
+	</item>
+</items>
