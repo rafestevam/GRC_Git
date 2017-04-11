@@ -223,6 +223,30 @@
     </enum>        					
 <!-- Final GAP GRC74 -->
 
+	<enum id="testcase_owner_status" isMultiple="false" type="Number" itemClass="ColoredEnumerationItem">
+        <enumitem id="all" value="-1" extendedMeaning="all" formRelevant="false"/>
+        <enumitem id="open" value="0" formRelevant="false" virtualScope.idrefs="new,in_process">
+            <parameter name="Background" value="0094E9"/> <!-- blue -->
+        </enumitem>
+        <enumitem id="new" value="1" formRelevant="false" image="iconlib/icons/states/state_new_16.png"/>
+        <enumitem id="in_process" value="2" image="iconlib/icons/states/state_in_process_16.png"/>
+        <enumitem id="effective" value="3" image="iconlib/icons/states/state_effective_16.png">
+            <parameter name="Background" value="ADCF00"/>  <!-- green -->
+        </enumitem>
+        <enumitem id="noneffective" value="4" image="iconlib/icons/states/state_noneffective_16.png">
+            <parameter name="Background" value="EF4231"/>  <!-- red -->
+        </enumitem>
+        <enumitem id="nottestable" value="5" image="iconlib/icons/states/state_not_testable_16.png">
+            <parameter name="Background" value="FFDE00"/>  <!-- yellow -->
+        </enumitem>
+        <enumitem id="nottested" value="6" formRelevant="false" image="iconlib/icons/states/state_not_processed_16.png">
+            <parameter name="Background" value="F9B600"/>  <!-- orange -->
+        </enumitem>
+        <!-- Status de Workflow -->
+        <enumitem id="to_be_reviewed" value="7" virtualScope.idrefs="effective, noneffective" filterRelevant="false" formRelevant="false"/>
+        <!-- / Status de Workflow -->
+    </enum>	
+
 
 
 
