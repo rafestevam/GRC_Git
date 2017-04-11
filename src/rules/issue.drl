@@ -144,6 +144,8 @@ rule "custom_GRC66 opened by creator --> init attribute states [I,V]"
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
 		set "acting_front"            mandatory #GAP - GRC74
+		
+		set "replanned"               editable  #GAP - GRC74
 
 		set "owner_status"            invisible
 		set "owner_remark"            invisible
@@ -192,12 +194,14 @@ rule "custom_GRC66_is opened by creator --> init attribute states [I,V]"
 		set "acting_front"            editable #GAP - GRC74
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
+		
+		set "replanned"               editable  #GAP - GRC74
 				
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
 		set "acting_front"            mandatory #GAP - GRC74
-
+		
 		set "owner_status"            invisible
 		set "owner_remark"            invisible
 		set "reviewer_status"         invisible
@@ -246,6 +250,7 @@ rule "custom_GRC66_ap opened by creator --> init attribute states [I,V]"
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
 
+		set "replanned"               editable  #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
@@ -299,6 +304,8 @@ rule "custom_GRC66_ap_hold opened by creator --> init attribute states [I,V]"
 		set "acting_front"            editable #GAP - GRC74
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
+		
+		set "replanned"               editable  #GAP - GRC74
 		
 		set "name"                    mandatory
 		set "description"             mandatory
@@ -439,6 +446,7 @@ rule "custom_GRC66_is opened by manager & issue in owner_state 'new' --> init [I
 		set "reviewers"               editable
 		set "documents"               editable
 		
+		set "replanned"               editable  #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
@@ -474,6 +482,8 @@ rule "custom_GRC66_ap opened by manager & issue in owner_state 'new' --> init [I
 		set "owners"                  editable
 		set "reviewers"               editable
 		set "documents"               editable
+
+		set "replanned"               editable  #GAP - GRC74
 
 		set "name"                    mandatory
 		set "description"             mandatory
@@ -976,4 +986,17 @@ rule "custom_ap_set_creator_status[I,V]"
 		set "custom_is_owner_status"     invisible
 		set "custom_is_reviewer_status"  invisible   
 		
+end
+
+
+rule "custom_set_issuesource[I,V]"
+
+	salience 90
+	no-loop true
+
+	when
+
+	then
+	  	
+		set "issuesource"       editable
 end

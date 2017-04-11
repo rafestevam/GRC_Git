@@ -72,12 +72,12 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 							
 					Logger.info(CustomIssueSaveActionCommand.class.getName(), "---->" +String.valueOf(actplnenddateValue));					
 					
-					this.displayLog("DATa issue date : " + issueendtateValue );
+					this.displayLog("DaTa issue date : " + issueendtateValue );
 					if(actplnenddateValue.after(issueendtateValue)){
 					
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_PLANNEDENDDATE).setRawValue(actplnenddateValue);
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");
-							
+						currIssueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");	
 					}
 					
 //					IBooleanAttribute replanned = iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED);								
