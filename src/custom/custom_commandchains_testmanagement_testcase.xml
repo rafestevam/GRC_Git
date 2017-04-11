@@ -184,7 +184,8 @@
                 <parameter name="operator" value="reviewer" />
             </command>
             <command id="createDeficiency" />
-            <command id="createIssue">
+<!--             <command id="createIssue"> -->
+			<command id="customCreateIssue">
                 <parameter name="rootObjectType" value="TESTCASE" />
             </command>
         </commandchain>
@@ -200,7 +201,8 @@
         </commandchain>
 
         <commandchain id="reviewCreateIssue">
-            <command id="createIssue" />
+<!--             <command id="createIssue" /> -->
+			<command id="customCreateIssue" /> 
         </commandchain>
 
         <commandchain id="followupWhileReview"/>

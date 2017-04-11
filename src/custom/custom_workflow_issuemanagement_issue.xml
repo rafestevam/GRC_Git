@@ -53,7 +53,7 @@
 
         <state id="openForCreation">
 <!--             <attribute id="creator_status" value="open"/> -->
-            <attribute id="custom_is_creator_status" value="new"/>
+            <attribute id="custom_is_creator_status" value="please_select, new"/>
 <!--             <attribute id="custom_ap_creator_status" value="new"/> -->
             <transitions>
                 <update to.state.id="openForCreation" chain.id="creationInPreparation">

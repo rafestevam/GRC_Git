@@ -72,7 +72,7 @@ function classRiskRes(riskPotencial, control){
 		return 'Alto';
 	}
 	if(intRiskPotencial === cMuitoAlto && intControl === cBaixo){
-		return 'M&eacute;dio';
+		return cMedio;
 	}
 	if(intRiskPotencial === cAlto && intControl === cMuitoAlto){
 		return 'Alto';
