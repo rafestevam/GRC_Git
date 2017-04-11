@@ -139,7 +139,7 @@ rule "custom_GRC66 opened by creator --> init attribute states [I,V]"
 		set "acting_front"            editable #GAP - GRC74
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
-
+		
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
@@ -192,7 +192,7 @@ rule "custom_GRC66_is opened by creator --> init attribute states [I,V]"
 		set "acting_front"            editable #GAP - GRC74
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
-
+				
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
@@ -246,6 +246,7 @@ rule "custom_GRC66_ap opened by creator --> init attribute states [I,V]"
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
 
+
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
@@ -298,7 +299,7 @@ rule "custom_GRC66_ap_hold opened by creator --> init attribute states [I,V]"
 		set "acting_front"            editable #GAP - GRC74
 		set "root_cause"              editable #GAP - GRC74
 		set "business_unit"           editable #GAP - GRC74
-
+		
 		set "name"                    mandatory
 		set "description"             mandatory
 		set "remediationMeasure"      mandatory
@@ -437,6 +438,7 @@ rule "custom_GRC66_is opened by manager & issue in owner_state 'new' --> init [I
 		set "owners"                  editable
 		set "reviewers"               editable
 		set "documents"               editable
+		
 
 		set "name"                    mandatory
 		set "description"             mandatory
@@ -444,6 +446,7 @@ rule "custom_GRC66_is opened by manager & issue in owner_state 'new' --> init [I
         set "plannedenddate"          mandatory
 		set "owners"                  mandatory
 		set "reviewers"               mandatory
+		
 
 end
 
@@ -947,6 +950,7 @@ rule "custom_is_set_creator_status[I,V]"
 		set "custom_ap_creator_status"   invisible
 		set "custom_ap_owner_status"     invisible
 		set "custom_ap_reviewer_status"  invisible   
+
 		
 end
 

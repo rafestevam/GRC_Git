@@ -37,7 +37,7 @@ public class CustomIssueGetRiskActionCommand extends IssueCacheActionCommand{
 		
 				
 		/*if(issueType.getId() != null ){*/
-		if(issueType.getId().equals("actiontype1")){
+		if(issueType.getId().equals("issue")){
 			
 			try{
 				
@@ -99,7 +99,7 @@ public class CustomIssueGetRiskActionCommand extends IssueCacheActionCommand{
 			}
 			
 			}
-		else if (issueType.getId().equals("actiontype2")) {
+		else if (issueType.getId().equals("actionplan")) {
 				try{
 					this.displayLog("action type 2");
 					while(iroIterator.hasNext()){

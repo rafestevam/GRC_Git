@@ -36,8 +36,8 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 		IEnumAttribute issueTypeList = currIssueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_ACTIONTYPE);
 		IEnumerationItem issueType = ARCMCollections.extractSingleEntry(issueTypeList.getRawValue(), true);
 		
-		if(issueType.getId().equals("actiontype2")){					
-						
+		 if(issueType.getId().equals("actionplan")){					
+			this.displayLog("Tipo dentro do if: " + issueType.getId());		
 			//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Data Fim: " + iroIterator.hasNext(), new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 			
 			try{
@@ -72,7 +72,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 							
 					Logger.info(CustomIssueSaveActionCommand.class.getName(), "---->" +String.valueOf(actplnenddateValue));					
 					
-					
+					this.displayLog("DATa issue date : " + issueendtateValue );
 					if(actplnenddateValue.after(issueendtateValue)){
 					
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_PLANNEDENDDATE).setRawValue(actplnenddateValue);
@@ -82,7 +82,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 					
 //					IBooleanAttribute replanned = iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED);								
 //					Boolean replannedValue = replanned.getRawValue();
-
+					this.displayLog("DATa currDataFim : " + currDataFimValue );
 					if(currDataFimValue.after(dataFimValue)){
 
 						iroUpdObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE).setRawValue(currDataFimValue);
