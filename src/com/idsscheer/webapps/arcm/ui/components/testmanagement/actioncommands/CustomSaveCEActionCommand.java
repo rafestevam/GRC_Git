@@ -229,6 +229,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			}else{
 				String riskFinal = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue();
 				riskClassFinal = this.riskFinalClass(riskClass1line, riskFinal);
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
 			}
 			
 			String riskResidualFinal = this.riskResidualFinal(this.riscoPotencial, riskClassFinal);
