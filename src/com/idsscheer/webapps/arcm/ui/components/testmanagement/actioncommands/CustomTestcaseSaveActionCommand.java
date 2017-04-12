@@ -240,6 +240,8 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			String riskClassFinal = "";
 			
 			if(this.origemTeste.equals("1linhadefesa")){
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_INEF2LINE).setRawValue(cntInef2Line);
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_FINAL2LINE).setRawValue(cntTotal2Line);
 				double risk2line = ( cntInef2Line / cntTotal2Line );
 				log.info("Ponderacao 2 linha: " + String.valueOf(risk2line));
 				String riskClass2line = this.riskClassification(risk2line);
@@ -252,6 +254,8 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			}
 			
 			if(this.origemTeste.equals("2linhadefesa")){
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_INEF3LINE).setRawValue(cntInef3Line);
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_FINAL3LINE).setRawValue(cntTotal3Line);
 				double risk3line = ( cntInef3Line / cntTotal3Line );
 				log.info("Ponderacao 3 linha: " + String.valueOf(risk3line));
 				String riskClass3line = this.riskClassification(risk3line);

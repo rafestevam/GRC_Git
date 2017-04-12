@@ -16,6 +16,7 @@
 	    	<mapping name="customUpdateStatus"      clsName="com.idsscheer.webapps.arcm.bl.component.issuemanagement.commands.CustomUpdateIssueStatus"/>
 	    	<mapping name="customUpdCreatorStatus"  clsName="com.idsscheer.webapps.arcm.bl.component.issuemanagement.commands.CustomUpdateCreatorStatus"/>
 	    	<mapping name="customUpdOwnerStatus"    clsName="com.idsscheer.webapps.arcm.bl.component.issuemanagement.commands.CustomUpdateOwnerStatus"/>
+	    	<mapping name="customUpdReviewerStatus" clsName="com.idsscheer.webapps.arcm.bl.component.issuemanagement.commands.CustomUpdateReviewerStatus"/>
 	    	<mapping name="customCreateIssue"       clsName="com.idsscheer.webapps.arcm.bl.component.issuemanagement.commands.CustomCreateIssueCommand"/>
 	    </mappingType>
 	    

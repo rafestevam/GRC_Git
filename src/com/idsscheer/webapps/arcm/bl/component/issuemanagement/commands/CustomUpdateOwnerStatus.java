@@ -25,14 +25,22 @@ public class CustomUpdateOwnerStatus implements ICommand {
 		if(!(actionTypeAttr.equals(null))){
 			IEnumerationItem actionTypeItem = ARCMCollections.extractSingleEntry(actionTypeAttr.getRawValue(), true);
 			if(actionTypeItem.getId().equals("issue")){
-				issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_OWNER_STATUS).setRawValue(
-						Collections.singletonList(EnumerationsCustom.CENUM_IS_OWNER_STATUS.IN_REVIEW)
-				);
+				IEnumAttribute creatorStatusAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS);
+				IEnumerationItem creatorStatus = ARCMCollections.extractSingleEntry(creatorStatusAttr.getRawValue(), true);
+				if(creatorStatus.equals(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.IN_REVIEW)){
+					issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_OWNER_STATUS).setRawValue(
+							Collections.singletonList(EnumerationsCustom.CENUM_IS_OWNER_STATUS.IN_REVIEW)
+					);
+				}
 			}
 			if(actionTypeItem.getId().equals("actionplan")){
-				issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_AP_CREATOR_STATUS).setRawValue(
-						Collections.singletonList(EnumerationsCustom.CENUM_AP_OWNER_STATUS.IN_PROGRESS)
-				);
+				IEnumAttribute creatorStatusAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS);
+				IEnumerationItem creatorStatus = ARCMCollections.extractSingleEntry(creatorStatusAttr.getRawValue(), true);
+				if(creatorStatus.equals(EnumerationsCustom.CENUM_AP_CREATOR_STATUS.IN_PROGRESS)){
+					issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_AP_OWNER_STATUS).setRawValue(
+							Collections.singletonList(EnumerationsCustom.CENUM_AP_OWNER_STATUS.IN_PROGRESS)
+					);
+				}
 			}
 		}
 		

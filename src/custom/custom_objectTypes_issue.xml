@@ -89,11 +89,11 @@
         
         <!-- Inicio GAP - GRC66 -->
         <enumAttrType id="custom_is_creator_status" enumeration="cenum_is_creator_status" defaultValue="0"/>
-        <enumAttrType id="custom_is_owner_status" enumeration="cenum_is_owner_status" defaultValue="1"/>
-        <enumAttrType id="custom_is_reviewer_status" enumeration="cenum_is_reviewer_status" defaultValue="1"/>
+        <enumAttrType id="custom_is_owner_status" enumeration="cenum_is_owner_status" defaultValue="0"/>
+        <enumAttrType id="custom_is_reviewer_status" enumeration="cenum_is_reviewer_status" defaultValue="0"/>
         <enumAttrType id="custom_ap_creator_status" enumeration="cenum_ap_creator_status" defaultValue="0"/>
-        <enumAttrType id="custom_ap_owner_status" enumeration="cenum_ap_owner_status" defaultValue="1"/>
-        <enumAttrType id="custom_ap_reviewer_status" enumeration="cenum_ap_reviewer_status" defaultValue="1"/>
+        <enumAttrType id="custom_ap_owner_status" enumeration="cenum_ap_owner_status" defaultValue="0"/>
+        <enumAttrType id="custom_ap_reviewer_status" enumeration="cenum_ap_reviewer_status" defaultValue="0"/>
 		<!-- Fim GAP - GRC66 -->
 	
         <index id="I_ISSUE_1" type="normal">

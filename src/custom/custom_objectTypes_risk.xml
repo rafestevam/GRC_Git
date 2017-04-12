@@ -165,6 +165,13 @@
         <stringAttrType id="ra_residual2line" maxCharCount="50" isMassEditable="false" />
         <stringAttrType id="ra_residual3line" maxCharCount="50" isMassEditable="false" />
         <stringAttrType id="ra_residualfinal" maxCharCount="50" isMassEditable="false" />
+        
+        <doubleAttrType id="ra_inef1line" />
+        <doubleAttrType id="ra_final1line" />
+        <doubleAttrType id="ra_inef2line" />
+        <doubleAttrType id="ra_final2line" />
+        <doubleAttrType id="ra_inef3line" />
+        <doubleAttrType id="ra_final3line" />
         <!-- Fim GAP GRC98 -->
 
 

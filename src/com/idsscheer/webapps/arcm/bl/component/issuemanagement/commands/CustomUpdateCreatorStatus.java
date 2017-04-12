@@ -29,7 +29,7 @@ public class CustomUpdateCreatorStatus implements ICommand {
 		//log.info("Objeto Corrente Obtido: " + issueAppObj.getAttribute(IIssueAttributeType.ATTR_NAME).getRawValue());
 		log.info(this.getClass().getName(), "Objeto Corrente Obtido: " + issueAppObj.getAttribute(IIssueAttributeType.ATTR_NAME).getRawValue());
 		//IUserContext userCtx = cc.getChainContext().getUserContext();
-		
+				
 		try{
 		
 			IEnumAttribute actionTypeAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_ACTIONTYPE);
@@ -40,17 +40,25 @@ public class CustomUpdateCreatorStatus implements ICommand {
 				log.info(this.getClass().getName(), "actionTypeItem: " + actionTypeItem.getId());
 				if(actionTypeItem.getId().equals("issue")){
 					log.info(this.getClass().getName(), "apontamento é issue!");
-					issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS).setRawValue(
-							Collections.singletonList(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW)
-					);
-					log.info(this.getClass().getName(), "status issue é: " + EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW.getId());
+					IEnumAttribute creatorStatusAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS);
+					IEnumerationItem creatorStatus = ARCMCollections.extractSingleEntry(creatorStatusAttr.getRawValue(), true);
+					if(creatorStatus.equals(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.PLEASE_SELECT)){
+						issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS).setRawValue(
+								Collections.singletonList(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW)
+						);
+						log.info(this.getClass().getName(), "status issue é: " + EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW.getId());
+					}
 				}
 				if(actionTypeItem.getId().equals("actionplan")){
 					log.info(this.getClass().getName(), "apontamento é actionplan!");
-					issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_AP_CREATOR_STATUS).setRawValue(
-							Collections.singletonList(EnumerationsCustom.CENUM_AP_CREATOR_STATUS.NEW)
-					);
-					log.info(this.getClass().getName(), "status actionplan é: " + EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW.getId());
+					IEnumAttribute creatorStatusAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_AP_CREATOR_STATUS);
+					IEnumerationItem creatorStatus = ARCMCollections.extractSingleEntry(creatorStatusAttr.getRawValue(), true);
+					if(creatorStatus.equals(EnumerationsCustom.CENUM_AP_CREATOR_STATUS.PLEASE_SELECT)){
+						issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_AP_CREATOR_STATUS).setRawValue(
+								Collections.singletonList(EnumerationsCustom.CENUM_AP_CREATOR_STATUS.NEW)
+						);
+						log.info(this.getClass().getName(), "status actionplan é: " + EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW.getId());
+					}
 				}
 			}
 			
