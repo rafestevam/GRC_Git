@@ -1,31 +1,57 @@
 package com.idsscheer.webapps.arcm.bl.framework.jobs.specific;
 
 import java.util.Calendar;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Locale;
 
 import com.idsscheer.webapps.arcm.bl.exception.ObjectAccessException;
+import com.idsscheer.webapps.arcm.bl.exception.ObjectAccessException;
+import com.idsscheer.webapps.arcm.bl.exception.ObjectLockException;
 import com.idsscheer.webapps.arcm.bl.exception.ObjectLockException;
 import com.idsscheer.webapps.arcm.bl.exception.ObjectNotUniqueException;
+import com.idsscheer.webapps.arcm.bl.exception.ObjectNotUniqueException;
+import com.idsscheer.webapps.arcm.bl.exception.RightException;
 import com.idsscheer.webapps.arcm.bl.exception.RightException;
 import com.idsscheer.webapps.arcm.bl.framework.jobs.BaseJob;
+import com.idsscheer.webapps.arcm.bl.framework.jobs.BaseJob;
+import com.idsscheer.webapps.arcm.bl.framework.jobs.generic.CanBeScheduled;
 import com.idsscheer.webapps.arcm.bl.framework.jobs.generic.CanBeScheduled;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObj;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObj;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObjFacade;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObjFacade;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.attribute.IEnumAttribute;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.attribute.IEnumAttribute;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.FacadeFactory;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.FacadeFactory;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.ValidationException;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.impl.ValidationException;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjIterator;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjIterator;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjQuery;
+import com.idsscheer.webapps.arcm.bl.models.objectmodel.query.IAppObjQuery;
+import com.idsscheer.webapps.arcm.common.constants.metadata.EnumerationsCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.EnumerationsCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
+import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
+import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeType;
+import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.common.util.ARCMCollections;
+import com.idsscheer.webapps.arcm.common.util.ARCMCollections;
+import com.idsscheer.webapps.arcm.common.util.ovid.IOVID;
 import com.idsscheer.webapps.arcm.common.util.ovid.IOVID;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumerationItem;
+import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumerationItem;
 import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.JobAbortException;
+import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.JobAbortException;
+import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.JobWarningException;
 import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.JobWarningException;
 
 @CanBeScheduled
@@ -108,7 +134,7 @@ public class IssuePendingUpdateJob extends BaseJob {
 //				}
 
 				
-				if ( issueActionType == EnumerationsCustom.CUSTOM_ENUMACTIONTYPE.ACTIONPLAN && issuePlannedDate != null ) {
+				if ( issueActionType == EnumerationsCustom.CENUM_IS_ACTION_TYPE.actiontype2 && issuePlannedDate != null ) {
 					logger.info(this.getClass().getName(), "entered condition for action plan issues.");
 					/*
 					 * O status do criador ainda está em preparação
@@ -136,7 +162,7 @@ public class IssuePendingUpdateJob extends BaseJob {
 //							 && issueCreatorStatusType == EnumerationsCustom.CENUM_AP_CREATOR_STATUS.RELEASED ) {
 //							
 //							logger.info(this.getClass().getName(), "entered condition for issue owner.");
-//							iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_OWNER_STATUS)
+//							iroUpdObj.getAttribute(IIssueAttributeType.ATTR_OWNER_STATUS)
 //									.setRawValue(Collections.singletonList(EnumerationsCustom.CENUM_AP_OWNER_STATUS.PENDING));
 //							logger.info(this.getClass().getName(), "changed information for owner status.");
 //							facade.save(iroUpdObj, this.getInternalTransaction(), true);

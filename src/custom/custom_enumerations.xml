@@ -267,6 +267,8 @@
     </enum>
 	<!-- GRC 100 -->
 
+<!-- Inicio GRC100 -->
+
     <enum id="jobs" isMultiple="false" itemClass="JobEnumerationItem" type="Number">
         <enumitem id="all" value="-1" extendedMeaning="all" />
         <enumitem id="undefined" value="0" extendedMeaning="please_select" formRelevant="false" filterRelevant="false"/>
@@ -353,5 +355,5 @@
         </enumitem>
         <!-- GRC 82 -->
     </enum>
-
+    
 </custom>

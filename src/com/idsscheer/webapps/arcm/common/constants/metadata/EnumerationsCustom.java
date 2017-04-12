@@ -3,6 +3,7 @@ package com.idsscheer.webapps.arcm.common.constants.metadata;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.EnumerationWrapper;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumeration;
 import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumerationItem;
+import com.idsscheer.webapps.arcm.config.metadata.enumerations.JobEnumerationItem;
 
 public class EnumerationsCustom extends Enumerations {
 
@@ -83,4 +84,14 @@ public class EnumerationsCustom extends Enumerations {
 		public static final IEnumerationItem ISSUE_SLA = EnumerationsCustom.lookupEnumerationItem(ENUM, "updateIssueSLAUpdateJob");
 	}
 
+	public static abstract interface CENUM_IS_ACTION_TYPE {
+		public static final EnumerationWrapper ENUM = new EnumerationWrapper("action_type_test");
+		public static final IEnumerationItem actiontype1 = EnumerationsCustom.lookupEnumerationItem(ENUM,
+				"actiontype1");
+		public static final IEnumerationItem actiontype2 = EnumerationsCustom.lookupEnumerationItem(ENUM,
+				"actiontype2");
+		public static final IEnumerationItem actiontype3 = EnumerationsCustom.lookupEnumerationItem(ENUM,
+				"actiontype3");
+	}
+	
 }
