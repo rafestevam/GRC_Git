@@ -16,6 +16,7 @@ public class EnumerationsCustom extends Enumerations {
 	
 	public static abstract interface CENUM_IS_CREATOR_STATUS {
 		public static final EnumerationWrapper ENUM = new EnumerationWrapper("cenum_is_creator_status");
+		public static final IEnumerationItem PLEASE_SELECT = EnumerationsCustom.lookupEnumerationItem(ENUM, "please_select");
 		public static final IEnumerationItem NEW = EnumerationsCustom.lookupEnumerationItem(ENUM, "new");
 		public static final IEnumerationItem IN_REVIEW = EnumerationsCustom.lookupEnumerationItem(ENUM, "in_review");
 	}
@@ -44,6 +45,7 @@ public class EnumerationsCustom extends Enumerations {
 	
 	public static abstract interface CENUM_AP_CREATOR_STATUS {
 		public static final EnumerationWrapper ENUM = new EnumerationWrapper("cenum_ap_creator_status");
+		public static final IEnumerationItem PLEASE_SELECT = EnumerationsCustom.lookupEnumerationItem(ENUM, "please_select");
 		public static final IEnumerationItem NEW = EnumerationsCustom.lookupEnumerationItem(ENUM, "new");
 		public static final IEnumerationItem PENDING = EnumerationsCustom.lookupEnumerationItem(ENUM, "pending");
 		public static final IEnumerationItem IN_PROGRESS = EnumerationsCustom.lookupEnumerationItem(ENUM, "in_progress");
@@ -61,6 +63,7 @@ public class EnumerationsCustom extends Enumerations {
 	
 	public static abstract interface CENUM_AP_REVIEWER_STATUS {
 		public static final EnumerationWrapper ENUM = new EnumerationWrapper("cenum_ap_reviewer_status");
+		public static final IEnumerationItem IN_PROGRESS = EnumerationsCustom.lookupEnumerationItem(ENUM, "in_progress");
 		public static final IEnumerationItem FUP = EnumerationsCustom.lookupEnumerationItem(ENUM, "fup");
 		public static final IEnumerationItem NOT_APPROVED = EnumerationsCustom.lookupEnumerationItem(ENUM, "not_approved");
 		public static final IEnumerationItem SETTLED = EnumerationsCustom.lookupEnumerationItem(ENUM, "settled");

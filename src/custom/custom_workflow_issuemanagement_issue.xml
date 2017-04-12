@@ -118,6 +118,7 @@
         <state id="apOpenForExecution">
         	<attribute id="custom_ap_creator_status"   value="in_progress"/>
         	<attribute id="custom_ap_owner_status"     value="in_progress"/>
+        	<attribute id="custom_ap_reviewer_status"  value="not_approved"/>
             <transitions>
                 <update to.state.id="apOpenForExecution" chain.id="executionInProgress">
                 	<attribute.change id="custom_ap_owner_status" to="in_progress"/>
@@ -242,10 +243,10 @@
                 	<attribute.change id="custom_ap_reviewer_status" to="approved"/>
 <!--                     <attribute.change id="reviewer_status" to="approved"/> -->
                 </update>
-<!--                 <update to.state.id="openForExecution" chain.id="reopenedByReviewer"> -->
-<!--                 	<attribute.change id="custom_is_reviewer_status" to="fup"/> -->
+                <update to.state.id="apOpenForExecution" chain.id="apReopenedByReviewer">
+                	<attribute.change id="custom_ap_reviewer_status" to="not_approved"/>
 <!--                     <attribute.change id="reviewer_status" to="not_approved"/> -->
-<!--                 </update> -->
+                </update>
             </transitions>
         </state>
         

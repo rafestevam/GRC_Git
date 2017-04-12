@@ -567,7 +567,7 @@ rule "ap opened by owner & still open for owner --> init [I,V]"
 
 	when
 		( is in workflow state "apOpenForExecution" OR
-		  is in workflow state "onHold" )
+		  is in workflow state "apOnHold" )
 		user is assigned in list "owners"
 
 	then
@@ -612,7 +612,7 @@ rule "custom_grc66_ap opened by owner & still open for owner --> init [I,V]"
 
 	when
 		( is in workflow state "apOpenForExecution" OR
-		  is in workflow state "onHold" )
+		  is in workflow state "apOnHold" )
 		user is assigned in list "owners"
 		value comparison fulfilled: ":transient:" attr_value "action_type" "CONTAINS" value "actionplan"
 

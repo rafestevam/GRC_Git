@@ -11,7 +11,7 @@
             <command id="update">
                 <parameter name="creator" value="$user"/>
             </command>
-            <command id="customUpdCreatorStatus" />
+            <command id="customUpdCreatorStatus" /><!-- GAP - GRC66    -->
         </commandchain>
 
         <commandchain id="insertCreation">
@@ -19,7 +19,8 @@
 <!--             <command id="update"> -->
 <!--                 <parameter name="creator_status" value="in_creation"/> -->
 <!--             </command> -->
-			<command id="customUpdateStatus"/>
+			<command id="customUpdCreatorStatus" /><!-- GAP - GRC66    -->
+			<command id="customUpdateStatus"/><!-- GAP - GRC66    -->
         </commandchain>
 
         <commandchain id="insertExecution">
@@ -28,10 +29,12 @@
             <command id="issueUsersChangedSendMail" >
                 <parameter name="alwaysSending" value="true" />
             </command>
-<!--             <command id="customUpdOwnerStatus" />GAP - GRC66    -->
+            <command id="customUpdOwnerStatus" /><!-- GAP - GRC66    -->
         </commandchain>
 
-        <commandchain id="creationInPreparation"/>
+        <commandchain id="creationInPreparation">
+        	<command id="customUpdCreatorStatus" /><!-- GAP - GRC66    -->
+        </commandchain>
 <!--             <command id="update"> -->
 <!--                 <parameter name="creator_status" value="in_creation"/> -->
 <!--             </command> -->
@@ -46,7 +49,8 @@
             <command id="closingObjectDialog" />
             <command id="issueUsersChangedSendMail" >
                 <parameter name="alwaysSending" value="true" />
-            </command>           
+            </command>
+            <command id="customUpdOwnerStatus" /><!-- GAP - GRC66    -->          
         </commandchain>
 
         <commandchain id="executionInProgress">
@@ -93,7 +97,9 @@
 <!--             </command> -->
             <command id="createNewIROWrappers"/>
             <command id="issueToBeApprovedSendMail"/>
-            <command id="customUpdateStatus"/>
+            <command id="customUpdOwnerStatus" /><!-- GAP - GRC66    -->
+            <command id="customUpdReviewerStatus" /><!-- GAP - GRC66    -->
+            <command id="customUpdateStatus"/><!-- GAP - GRC66    -->
         </commandchain>
 
         <commandchain id="closedByOwner">
@@ -109,6 +115,7 @@
 <!--             </command> -->
             <command id="createNewIROWrappers"/>
             <command id="issueToBeApprovedSendMail"/>
+            <command id="customUpdReviewerStatus" /><!-- GAP - GRC66    --> 
         </commandchain>
 
         <commandchain id="closedByReviewer">
@@ -127,6 +134,17 @@
             </command>
             <command id="issueNotApprovedSendMail"/>
         </commandchain>
+        
+        <commandchain id="apReopenedByReviewer">
+            <command id="closingObjectDialog" />
+<!--             <command id="update"> -->
+<!--                 <parameter name="owner_status" value="in_progress"/> -->
+<!--             </command> -->
+            <command id="update">
+                <parameter name="custom_ap_owner_status" value="in_progress"/>
+            </command>
+            <command id="issueNotApprovedSendMail"/>
+        </commandchain>        
 
         <commandchain id="delete">
             <command id="checkIssueDeletionPossible"/>

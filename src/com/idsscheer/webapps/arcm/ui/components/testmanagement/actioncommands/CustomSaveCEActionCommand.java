@@ -206,7 +206,8 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 				}
 				
 			}
-			
+			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_INEF1LINE).setRawValue(count1line);
+			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_FINAL1LINE).setRawValue(countTotal);
 			double risk1line = ( count1line / countTotal );
 			String riskClass1line = this.riskClassification(risk1line);
 			log.info("Controles Inefetivos: " + String.valueOf(count1line));
