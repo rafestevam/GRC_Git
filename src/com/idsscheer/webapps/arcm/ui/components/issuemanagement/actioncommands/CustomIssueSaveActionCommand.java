@@ -68,15 +68,18 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 					Boolean breplaned = currIssueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).getRawValue();
 					this.displayLog("Status Replanejado : " + breplaned);					
 					
+
 					this.displayLog("Data fim : " + issueendtateValue );
 					
 					if(breplaned == true){
 					
+
+					this.displayLog("DaTa issue date : " + issueendtateValue );
+
 					if(actplnenddateValue.after(issueendtateValue)){
 					
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_PLANNEDENDDATE).setRawValue(actplnenddateValue);
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");
-	
 					}
 					
 					this.displayLog("Data DataFim corrente : " + currDataFimValue );
@@ -92,8 +95,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 					issueFacade.save(iroUpdObj, this.getDefaultTransaction(), true);
 					issueFacade.releaseLock(iroUpdObj.getVersionData().getHeadOVID());
 //					this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Passei facede Data apontamento " + currDataFimValue , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
-					break;
-					
+					break;					
 					}
 				}
 			}catch(Exception e){
