@@ -37,7 +37,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 		IEnumerationItem issueType = ARCMCollections.extractSingleEntry(issueTypeList.getRawValue(), true);
 		
 		 if(issueType.getId().equals("actionplan")){					
-			this.displayLog("Tipo dentro do if: " + issueType.getId());		
+						
 			//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Data Fim: " + iroIterator.hasNext(), new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 			
 			try{
