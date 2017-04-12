@@ -23,7 +23,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 	private static final com.idsscheer.batchserver.logging.Logger debuglog = new com.idsscheer.batchserver.logging.Logger();	
 	private static final boolean DEBUGGER_ON = true;
 	protected void afterExecute(){
-			
+//			
 		
 		//IUIEnvironment currEnv = this.environment;
 		IAppObj currIssueAppObj = this.formModel.getAppObj();
