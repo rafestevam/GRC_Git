@@ -83,15 +83,5 @@ public class EnumerationsCustom extends Enumerations {
 		public static final IEnumerationItem ISSUE_PENDING = EnumerationsCustom.lookupEnumerationItem(ENUM, "updateIssuesJob");
 		public static final IEnumerationItem ISSUE_SLA = EnumerationsCustom.lookupEnumerationItem(ENUM, "updateIssueSLAUpdateJob");
 	}
-
-	public static abstract interface CENUM_IS_ACTION_TYPE {
-		public static final EnumerationWrapper ENUM = new EnumerationWrapper("action_type_test");
-		public static final IEnumerationItem actiontype1 = EnumerationsCustom.lookupEnumerationItem(ENUM,
-				"actiontype1");
-		public static final IEnumerationItem actiontype2 = EnumerationsCustom.lookupEnumerationItem(ENUM,
-				"actiontype2");
-		public static final IEnumerationItem actiontype3 = EnumerationsCustom.lookupEnumerationItem(ENUM,
-				"actiontype3");
-	}
 	
 }

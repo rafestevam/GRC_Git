@@ -134,7 +134,7 @@ public class IssuePendingUpdateJob extends BaseJob {
 //				}
 
 				
-				if ( issueActionType == EnumerationsCustom.CENUM_IS_ACTION_TYPE.actiontype2 && issuePlannedDate != null ) {
+				if ( issueActionType == EnumerationsCustom.CUSTOM_ENUMACTIONTYPE.ACTIONPLAN && issuePlannedDate != null ) {
 					logger.info(this.getClass().getName(), "entered condition for action plan issues.");
 					/*
 					 * O status do criador ainda está em preparação
