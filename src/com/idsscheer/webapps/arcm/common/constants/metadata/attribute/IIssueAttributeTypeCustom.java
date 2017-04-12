@@ -26,6 +26,9 @@ public interface IIssueAttributeTypeCustom extends IIssueAttributeType {
 	public static final String STR_CST_MODELNAME="cst_modelname";	
 	public static final StringAttributeType  ATTR_CST_MODELNAME= (StringAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_CST_MODELNAME);
 		
+	public static final String STR_CST_PROCESS="cst_process";	
+	public static final StringAttributeType  ATTR_CST_PROCESS= (StringAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_CST_PROCESS);
+	
 	public static final String STR_ACTIONTYPE = "action_type";
 	public static final IEnumAttributeType ATTR_ACTIONTYPE = (IEnumAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_ACTIONTYPE);
 	

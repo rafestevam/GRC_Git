@@ -45,7 +45,11 @@
             <extendedFilter filterRow.idref="deactivated"/>
         </extendedFilterRow>
         <extendedFilterRow>
-            <extendedFilter filterRow.idref="action_type"/>            
+            <extendedFilter filterRow.idref="action_type"/>
+            <extendedFilter filterRow.idref="replanned"/>            
+        </extendedFilterRow>
+        <extendedFilterRow>
+            <extendedFilter filterRow.idref="recurrent"/>                        
         </extendedFilterRow>
         <listHeaderRow>
             <listHeader column="LC_Issues_1" propertyKey="tableheader.issue.id.DBI" width="8%"/>
@@ -60,6 +64,8 @@
             <listHeader column="LC_Issues_8" propertyKey="tableheader.issue.stateTime.short.DBI" tooltip="tableheader.issue.stateTime.DBI" width="8%"/>
             <listHeader column="LC_Issues_9" propertyKey="tableheader.description" width="18%"/>
             <listHeader column="LC_Issues_10" propertyKey="tableheader.issue.remediationMeasure.DBI" width="17%"/>
+            <listHeader column="LC_Issues_13" propertyKey="tableheader.issue.recurrent.DBI" width="10%"/>
+            <listHeader column="LC_Issues_14" propertyKey="tableheader.issue.replanned.DBI" width="10%"/>
         </listHeaderRow>
         <column id="LC_Issues_1" dataReference.idref="IssueID" template="openObject">
             <parameter name="idColumn" value="IssueID"/>
@@ -89,6 +95,8 @@
         </column>
         <column id="LC_Issues_9" dataReference.idref="description"/>
         <column id="LC_Issues_10" dataReference.idref="remediationMeasure"/>
+        <column id="LC_Issues_13" dataReference.idref="recurrent"/>
+        <column id="LC_Issues_14" dataReference.idref="replanned"/>
         <listButtons>
             <buttonReference button.idref="LIST_CREATE"/>
             <buttonReference button.idref="LIST_OPEN"/>
