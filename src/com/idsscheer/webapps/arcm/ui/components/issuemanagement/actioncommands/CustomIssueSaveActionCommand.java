@@ -23,7 +23,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 	private static final com.idsscheer.batchserver.logging.Logger debuglog = new com.idsscheer.batchserver.logging.Logger();	
 	private static final boolean DEBUGGER_ON = true;
 	protected void afterExecute(){
-			
+//			
 		
 		//IUIEnvironment currEnv = this.environment;
 		IAppObj currIssueAppObj = this.formModel.getAppObj();
@@ -37,7 +37,8 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 		IEnumerationItem issueType = ARCMCollections.extractSingleEntry(issueTypeList.getRawValue(), true);
 		
 		 if(issueType.getId().equals("actionplan")){					
-						
+			this.displayLog("Tipo : " + issueType.getId());		
+
 			//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Data Fim: " + iroIterator.hasNext(), new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 			
 			try{
@@ -47,22 +48,17 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 					IAppObj iroAppObj = iroIterator.next();
 					IOVID iroOVID = iroAppObj.getVersionData().getHeadOVID();
 					IAppObj iroUpdObj = issueFacade.load(iroOVID, true);
-					//currIssueAppObj.getAttribute(IIssueAttributeType.LIST_ISSUERELEVANTOBJECTS).removeElement(iroAppObj, this.getUserContext());
-					//currIssueAppObj.getAttribute(IIssueAttributeType.LIST_ISSUERELEVANTOBJECTS).g(iroAppObj, this.getUserContext());
 							
 					if(iroAppObj.getObjectType() != ObjectType.ISSUE)
 						continue;
 					
 					issueFacade.allocateWriteLock(iroUpdObj.getVersionData().getHeadOVID());
-//					this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "write lock - version " + String.valueOf(iroAppObj.getVersionData().getSubstituteUserOVID()) , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
-					
-					
+				
 					IDateAttribute actplnenddate = currIssueAppObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE);
 					Date actplnenddateValue = actplnenddate.getRawValue();
 					
 					IDateAttribute issueenddate = iroUpdObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE);
 					Date issueendtateValue = issueenddate.getRawValue();
-					
 					
 					IDateAttribute currDataFim = currIssueAppObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE);
 					Date currDataFimValue = currDataFim.getRawValue();
@@ -70,31 +66,38 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 					IDateAttribute dataFim = iroUpdObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE);								
 					Date dataFimValue = dataFim.getRawValue();
 							
-					Logger.info(CustomIssueSaveActionCommand.class.getName(), "---->" +String.valueOf(actplnenddateValue));					
+					Boolean breplaned = currIssueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).getRawValue();
+					this.displayLog("Status Replanejado : " + breplaned);					
 					
+
+					this.displayLog("Data fim : " + issueendtateValue );
+					
+					if(breplaned == true){
+					
+
 					this.displayLog("DaTa issue date : " + issueendtateValue );
+
 					if(actplnenddateValue.after(issueendtateValue)){
 					
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_PLANNEDENDDATE).setRawValue(actplnenddateValue);
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");
-						currIssueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");	
 					}
 					
-//					IBooleanAttribute replanned = iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED);								
-//					Boolean replannedValue = replanned.getRawValue();
-					this.displayLog("DATa currDataFim : " + currDataFimValue );
+					this.displayLog("Data DataFim corrente : " + currDataFimValue );
+
 					if(currDataFimValue.after(dataFimValue)){
 
 						iroUpdObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE).setRawValue(currDataFimValue);
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");
-						this.displayLog("DATa : " + currDataFimValue );
+						this.displayLog("Data Replanejada : " + currDataFimValue );
 //						this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Nova Data do apontamento..: " + currDataFimValue , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 					}
-//					this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Save lock - version " + String.valueOf(iroAppObj.getVersionData().getHeadOVID()) , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
+
 					issueFacade.save(iroUpdObj, this.getDefaultTransaction(), true);
 					issueFacade.releaseLock(iroUpdObj.getVersionData().getHeadOVID());
 //					this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Passei facede Data apontamento " + currDataFimValue , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
-					break;
+					break;					
+					}
 				}
 			}catch(Exception e){
 				this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, e.getMessage() , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
