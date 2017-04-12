@@ -35,7 +35,7 @@
 	 	 <stringAttrType id="ra_result" maxCharCount="50" isMassEditable="false"/>
 	 	 <stringAttrType id="ra_residualfinal"  maxCharCount="50" isMassEditable="false"/>
 	 	 <stringAttrType id="cst_modelname" maxCharCount="800" isMassEditable="false"/>
-            
+         <stringAttrType id="cst_process" maxCharCount="800" isMassEditable="false"/>   
    <!-- 
         <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="54">
             <listRestriction>

@@ -21,6 +21,8 @@
             <viewColumn id="created_by_testcase" attributeType="created_by_testcase"/>
             <viewColumn id="version_active" attributeType="version_active"/>
             <viewColumn id="deactivated" attributeType="deactivated" isSelectColumn="true"/>
+            <viewColumn id="recurrent" attributeType="recurrent" isSelectColumn="true"/>
+            <viewColumn id="replanned" attributeType="replanned" isSelectColumn="true"/>
         </viewObject>
         <viewObject id="VO_Issues_CREATOR" objectType="USER">
             <viewColumn id="creator_name" attributeType="name" isSelectColumn="true"/>
@@ -64,6 +66,8 @@
                 <condition column.id="owner_name" compareType="LIKE"/>
                 <condition column.id="reviewer_name" compareType="LIKE"/>
                 <condition column.id="action_type" compareType="IN"/>
+                <condition column.id="recurrent" compareType="IN"/>
+                <condition column.id="replanned" compareType="IN"/>
             </compoundCondition>
         </conditions>
     </view>

@@ -11,6 +11,7 @@ import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IHierarchyAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
+import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IRiskAttributeTypeCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.ITestcaseAttributeType;
 import com.idsscheer.webapps.arcm.common.notification.NotificationTypeEnum;
@@ -47,6 +48,16 @@ public class CustomIssueGetRiskActionCommand extends IssueCacheActionCommand{
 					IOVID iroOVID = iroAppObj.getVersionData().getHeadOVID();
 					IAppObj iroLstObj = testFacade.load(iroOVID, true);
 					
+					/*if(iroAppObj.getObjectType() != ObjectType.HIERARCHY)
+						continue;
+					
+					this.displayLog("SubProcesso : ");
+					List<IAppObj> subObj = iroLstObj.getAttribute(IHierarchyAttributeType.LIST_CHILDREN).getElements(this.getUserContext());
+					
+					for(IAppObj sbObj : subObj){
+						this.displayLog("SubProcesso : " + sbObj.getAttribute(IHierarchyAttributeType.ATTR_MODEL_NAME).getRawValue());
+					}*/
+					
 					
 					if(iroAppObj.getObjectType() != ObjectType.TESTCASE)
 						continue;
@@ -54,14 +65,16 @@ public class CustomIssueGetRiskActionCommand extends IssueCacheActionCommand{
 					
 					testFacade.allocateWriteLock(iroLstObj.getVersionData().getHeadOVID());								
 					
+					
 					List<IAppObj> LstprocObj = iroLstObj.getAttribute(ITestcaseAttributeType.LIST_PROCESS).getElements(this.getUserContext());				
 					
 					for(IAppObj pcObj : LstprocObj ){
 						
+												
 						String smodelname = pcObj.getAttribute(IHierarchyAttributeType.ATTR_MODEL_NAME).getRawValue();
 						this.displayLog("Processo:"+ smodelname );
 					
-					
+						
 						issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_CST_MODELNAME).setRawValue(smodelname);
 						this.displayLog("Objeto relevan: " + String.valueOf(pcObj.getAttribute(IHierarchyAttributeType.ATTR_MODEL_NAME )));	
 					}

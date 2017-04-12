@@ -56,6 +56,10 @@
                 
                  <row id="cst_modelname">
                     <element attribute.idref="cst_modelname"/>
+                </row>
+                
+                <row id="cst_process">
+                    <element attribute.idref="cst_process"/>
                 </row>                
                                 
                 <row id="root_cause">

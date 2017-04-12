@@ -68,6 +68,18 @@
                 <parameter name="showAll" value="false"/>
             </filterElement>
         </filterRow>
+        <filterRow id="recurrent">
+            <filterElement dataReference.idref="recurrent" default="-1">
+                <!-- <parameter name="showAll" value="false"/> -->
+            </filterElement>
+        </filterRow>
+        <filterRow id="replanned">
+            <filterElement dataReference.idref="replanned" default="-1">
+                <!-- <parameter name="showAll" value="false"/> -->
+            </filterElement>
+        </filterRow>
+        
+        
     </filter>
 
 
