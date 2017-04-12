@@ -1,4 +1,3 @@
-/*** Eclipse Class Decompiler plugin, copyright (c) 2016 Chen Chao (cnfree2000@hotmail.com) ***/
 package com.idsscheer.webapps.arcm.bl.framework.jobs.specific;
 
 import java.util.Calendar;
@@ -31,8 +30,7 @@ import com.idsscheer.webapps.arcm.services.framework.batchserver.services.jobs.J
 
 @CanBeScheduled
 public class IssuePendingUpdateJob extends BaseJob {
-//	public static final String KEY_JOB_NAME = EnumerationsCustom.CUSTOM_JOBS.ISSUESPENDING.getPropertyKey();
-	public static final String KEY_JOB_NAME = "teste";
+	public static final String KEY_JOB_NAME = EnumerationsCustom.CUSTOM_JOBS.ISSUE_PENDING.getPropertyKey();
 	private static final com.idsscheer.batchserver.logging.Logger logger = new com.idsscheer.batchserver.logging.Logger();
 
 	public IssuePendingUpdateJob(IOVID executingUser, Locale executingLocale) {

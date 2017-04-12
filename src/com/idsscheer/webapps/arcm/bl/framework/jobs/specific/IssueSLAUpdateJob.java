@@ -36,9 +36,10 @@ public class IssueSLAUpdateJob extends BaseJob {
 	// EnumerationsCustom.CUSTOM_JOBS.ISSUESPENDING.getPropertyKey();
 
 	private static final boolean DEBUGGER_ON = true;
-	public static final String KEY_JOB_NAME = "teste";
-	private static final com.idsscheer.batchserver.logging.Logger logger = new com.idsscheer.batchserver.logging.Logger();
+	public static final String KEY_JOB_NAME = EnumerationsCustom.CUSTOM_JOBS.ISSUE_SLA.getPropertyKey();
 	private static final int ISSUE_SLA = 15; // Número de dias de SLA.
+	
+	private static final com.idsscheer.batchserver.logging.Logger logger = new com.idsscheer.batchserver.logging.Logger();
 
 	public IssueSLAUpdateJob(IOVID executingUser, Locale executingLocale) {
 		super(executingUser, executingLocale);
