@@ -67,5 +67,11 @@ public class EnumerationsCustom extends Enumerations {
 		public static final IEnumerationItem ATTENDED = EnumerationsCustom.lookupEnumerationItem(ENUM, "attended");
 		public static final IEnumerationItem RISK_ASSUMED = EnumerationsCustom.lookupEnumerationItem(ENUM, "risk_assumed");
 	}
+	
+	public static abstract interface CUSTOM_ENUMACTIONTYPE{
+		public static final EnumerationWrapper ENUM = new EnumerationWrapper("custom_enumactiontype");
+		public static final IEnumerationItem ACTIONPLAN = EnumerationsCustom.lookupEnumerationItem(ENUM, "actionplan");
+		public static final IEnumerationItem ISSUE = EnumerationsCustom.lookupEnumerationItem(ENUM, "issue");
+	}
 
 }

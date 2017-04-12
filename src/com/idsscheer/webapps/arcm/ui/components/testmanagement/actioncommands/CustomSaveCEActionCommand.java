@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.aris.umc.audit.event.UserUpdate;
+import com.idsscheer.webapps.arcm.bl.authorization.rights.config.RoleConfigFacade;
+import com.idsscheer.webapps.arcm.bl.authorization.rights.runtime.accesscontrol.standard.UserAccessControl;
+import com.idsscheer.webapps.arcm.bl.authorization.rights.runtime.userrole.UserRoleFacade;
+import com.idsscheer.webapps.arcm.bl.authorization.rights.support.UserRoleUtility;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObj;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObjFacade;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.attribute.IEnumAttribute;
@@ -217,7 +222,17 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			if(riskClass3line == null)
 				riskClass3line = "";
 			
-			String riskClassFinal = this.riskFinalClassification(riskClass1line, riskClass2line, riskClass3line);
+			//String riskClassFinal = this.riskFinalClassification(riskClass1line, riskClass2line, riskClass3line);
+			String riskClassFinal = riskClass1line;
+			if(riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).isEmpty()){
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+			}else{
+				String riskFinal = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue();
+				riskClassFinal = this.riskFinalClass(riskClass1line, riskFinal);
+				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+			}
+			log.info("Amb. Controle Final: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue());
+			log.info("Risco Potencial: " + this.riscoPotencial);
 			
 			String riskResidualFinal = this.riskResidualFinal(this.riscoPotencial, riskClassFinal);
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESIDUALFINAL).setRawValue(riskResidualFinal);
@@ -360,16 +375,65 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 		switch(maxHeightCtrl){
 		case 4:
 			riskClassFinal = "Muito Alto";
+			break;
 		case 3:
 			riskClassFinal = "Alto";
+			break;
 		case 2:
 			riskClassFinal = "Médio";
+			break;
 		case 1:
 			riskClassFinal = "Baixo";
+			break;
 		}
 		
 		return riskClassFinal;
 		
+	}
+	
+	private String riskFinalClass(String risk1line, String riskFinal){
+		
+		int height_1line = 0;
+		int height_final = 0;
+		String riskClassFinal = "";
+		
+		//Classificação - Amb. Controles 1a Linha
+		if(risk1line.equalsIgnoreCase("Muito Alto"))
+			height_1line = 4;
+		if(risk1line.equalsIgnoreCase("Alto"))
+			height_1line = 3;
+		if(risk1line.equalsIgnoreCase("Médio"))
+			height_1line = 2;
+		if(risk1line.equalsIgnoreCase("Baixo"))
+			height_1line = 1;
+		
+		//Classificação - Amb. Controles 1a Linha
+		if(riskFinal.equalsIgnoreCase("Muito Alto"))
+			height_final = 4;
+		if(riskFinal.equalsIgnoreCase("Alto"))
+			height_final = 3;
+		if(riskFinal.equalsIgnoreCase("Médio"))
+			height_final = 2;
+		if(riskFinal.equalsIgnoreCase("Baixo"))
+			height_final = 1;
+		
+		if(height_1line > height_final){
+			switch(height_1line){
+			case 4:
+				riskClassFinal = "Muito Alto";
+				break;
+			case 3:
+				riskClassFinal = "Alto";
+				break;
+			case 2:
+				riskClassFinal = "Médio";
+				break;
+			case 1:
+				riskClassFinal = "Baixo";
+				break;
+			}			
+		}
+		return riskClassFinal;
 	}
 	
 	private String riskResidualFinal(String riskPotencial, String riskControlFinal){

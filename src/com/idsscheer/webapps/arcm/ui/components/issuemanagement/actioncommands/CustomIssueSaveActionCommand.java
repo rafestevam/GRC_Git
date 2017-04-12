@@ -38,6 +38,7 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 		
 		 if(issueType.getId().equals("actionplan")){					
 			this.displayLog("Tipo : " + issueType.getId());		
+
 			//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Data Fim: " + iroIterator.hasNext(), new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 			
 			try{
