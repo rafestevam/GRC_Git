@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import com.idsscheer.batchserver.logging.Logger;
+import org.apache.log4j.Logger;
+
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObj;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObjFacade;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.attribute.IDateAttribute;
@@ -20,8 +21,9 @@ import com.idsscheer.webapps.arcm.config.metadata.enumerations.IEnumerationItem;
 
 public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 	
-	private static final com.idsscheer.batchserver.logging.Logger debuglog = new com.idsscheer.batchserver.logging.Logger();	
-	private static final boolean DEBUGGER_ON = true;
+	//private static final com.idsscheer.batchserver.logging.Logger debuglog = new com.idsscheer.batchserver.logging.Logger();	
+	//private static final boolean DEBUGGER_ON = true;
+	final Logger log = Logger.getLogger(CustomIssueSaveActionCommand.class.getName());
 	protected void afterExecute(){
 //			
 		
@@ -37,8 +39,9 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 		IEnumerationItem issueType = ARCMCollections.extractSingleEntry(issueTypeList.getRawValue(), true);
 		
 		 if(issueType.getId().equals("actionplan")){					
-			this.displayLog("Tipo : " + issueType.getId());		
-
+			//this.displayLog("Tipo : " + issueType.getId());		
+			 log.info("Tipo : " + issueType.getId());
+			 
 			//this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Data Fim: " + iroIterator.hasNext(), new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 			
 			try{
@@ -67,29 +70,34 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 					Date dataFimValue = dataFim.getRawValue();
 							
 					Boolean breplaned = currIssueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).getRawValue();
-					this.displayLog("Status Replanejado : " + breplaned);					
+					//this.displayLog("Status Replanejado : " + breplaned);
+					log.info("Status Replanejado : " + breplaned);
 					
 
-					this.displayLog("Data fim : " + issueendtateValue );
+					//this.displayLog("Data fim : " + issueendtateValue );
+					log.info("Data fim : " + issueendtateValue );
 					
 					if(breplaned == true){
 					
 
-					this.displayLog("DaTa issue date : " + issueendtateValue );
+					//this.displayLog("DaTa issue date : " + issueendtateValue );
+					log.info("DaTa issue date : " + issueendtateValue);
 
 					if(actplnenddateValue.after(issueendtateValue)){
 					
-						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_PLANNEDENDDATE).setRawValue(actplnenddateValue);
+						iroUpdObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE).setRawValue(actplnenddateValue);
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");
 					}
 					
-					this.displayLog("Data DataFim corrente : " + currDataFimValue );
+					//this.displayLog("Data DataFim corrente : " + currDataFimValue );
+					log.info("Data DataFim corrente : " + currDataFimValue);
 
 					if(currDataFimValue.after(dataFimValue)){
 
 						iroUpdObj.getAttribute(IIssueAttributeType.ATTR_PLANNEDENDDATE).setRawValue(currDataFimValue);
 						iroUpdObj.getAttribute(IIssueAttributeTypeCustom.ATTR_REPLANNED).setRawValue("True");
-						this.displayLog("Data Replanejada : " + currDataFimValue );
+						//this.displayLog("Data Replanejada : " + currDataFimValue );
+						log.info("Data Replanejada : " + currDataFimValue);
 //						this.formModel.addControlInfoMessage(NotificationTypeEnum.INFO, "Nova Data do apontamento..: " + currDataFimValue , new String[] { getStringRepresentation(this.formModel.getAppObj()) });
 					}
 
@@ -106,9 +114,9 @@ public class CustomIssueSaveActionCommand extends IssueSaveActionCommand  {
 		
 	}
 	
-	private void displayLog(String message){
+	/*private void displayLog(String message){
 		if(DEBUGGER_ON){
 			debuglog.info(this.getClass().getName(),message );
 		}
-	}
+	}*/
 }

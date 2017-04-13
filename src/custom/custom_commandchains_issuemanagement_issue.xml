@@ -11,7 +11,7 @@
             <command id="update">
                 <parameter name="creator" value="$user"/>
             </command>
-            <command id="customUpdCreatorStatus" /><!-- GAP - GRC66    -->
+<!--             <command id="customUpdCreatorStatus"/>GAP - GRC66    -->
         </commandchain>
 
         <commandchain id="insertCreation">
@@ -50,7 +50,25 @@
             <command id="issueUsersChangedSendMail" >
                 <parameter name="alwaysSending" value="true" />
             </command>
-            <command id="customUpdOwnerStatus" /><!-- GAP - GRC66    -->          
+            <!-- Inicio GAP - GRC66 -->
+<!--             <command id="update"> -->
+<!--             	<parameter name="custom_is_owner_status" value="in_review"/> -->
+<!--             </command> -->
+            <!-- Fim GAP - GRC66 -->
+            <command id="customUpdOwnerStatus" /><!-- Fim GAP - GRC66 -->           
+        </commandchain>
+        
+        <commandchain id="apCreationReleased">
+            <command id="closingObjectDialog" />
+            <command id="issueUsersChangedSendMail" >
+                <parameter name="alwaysSending" value="true" />
+            </command>
+            <!-- Inicio GAP - GRC66 -->
+            <command id="update">
+            	<parameter name="custom_ap_owner_status" value="to_be_evaluated"/>
+            </command>
+            <!-- Fim GAP - GRC66 -->
+<!--             <command id="customUpdOwnerStatus" />GAP - GRC66              -->
         </commandchain>
 
         <commandchain id="executionInProgress">

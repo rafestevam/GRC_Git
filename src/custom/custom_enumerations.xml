@@ -73,7 +73,7 @@
     	<enumitem id="in_progress" value="3" image="iconlib/icons/states/state_in_process_16.png"/>
     	<enumitem id="fup" value="4" image="iconlib/icons/states/state_warnings_16.png"/>
 		<!-- Status de Workflow -->
-    	<enumitem id="open_for_execution" value="5" virtualScope.idrefs="in_review,in_progress,fup" formRelevant="false" filterRelevant="false"/>
+    	<enumitem id="open_for_execution" value="-1" virtualScope.idrefs="in_review,in_progress,fup" formRelevant="false" filterRelevant="false"/>
     	<!-- / Status de Workflow -->       	
     	<enumitem id="attended" value="6" image="iconlib/icons/states/state_auto_accepted_16.png"/>
     	<enumitem id="risk_assumed" value="7" image="iconlib/icons/states/state_prio_high_16.png"/>
@@ -97,6 +97,7 @@
     </enum>
     
     <enum id="cenum_ap_creator_status" isMultiple="false" type="Number">
+    	<enumitem id="to_be_evaluated" value="-1" virtualScope.idrefs="in_progress" filterRelevant="false"/>
     	<enumitem id="please_select" value="0" extendedMeaning="please_select" formRelevant="false" filterRelevant="false"/>
     	<enumitem id="new" value="1" image="iconlib/icons/states/state_in_process_16.png"/>
     	<enumitem id="pending" value="2" image="iconlib/icons/states/state_level_empty_16.png"/>

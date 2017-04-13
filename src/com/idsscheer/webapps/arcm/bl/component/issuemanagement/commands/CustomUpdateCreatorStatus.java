@@ -29,7 +29,8 @@ public class CustomUpdateCreatorStatus implements ICommand {
 		//log.info("Objeto Corrente Obtido: " + issueAppObj.getAttribute(IIssueAttributeType.ATTR_NAME).getRawValue());
 		log.info(this.getClass().getName(), "Objeto Corrente Obtido: " + issueAppObj.getAttribute(IIssueAttributeType.ATTR_NAME).getRawValue());
 		//IUserContext userCtx = cc.getChainContext().getUserContext();
-				
+		String issueType = cc.getCommandXMLParameter("issueType");
+		
 		try{
 		
 			IEnumAttribute actionTypeAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_ACTIONTYPE);
@@ -38,15 +39,18 @@ public class CustomUpdateCreatorStatus implements ICommand {
 			if(!actionTypeAttr.equals(null)){
 				IEnumerationItem actionTypeItem = ARCMCollections.extractSingleEntry(actionTypeAttr.getRawValue(), true);
 				log.info(this.getClass().getName(), "actionTypeItem: " + actionTypeItem.getId());
-				if(actionTypeItem.getId().equals("issue")){
+				if(actionTypeItem.getId().equals("issue")){// || issueType.equals("issue")){
 					log.info(this.getClass().getName(), "apontamento é issue!");
 					IEnumAttribute creatorStatusAttr = issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS);
 					IEnumerationItem creatorStatus = ARCMCollections.extractSingleEntry(creatorStatusAttr.getRawValue(), true);
-					if(creatorStatus.equals(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.PLEASE_SELECT)){
-						issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS).setRawValue(
-								Collections.singletonList(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW)
-						);
-						log.info(this.getClass().getName(), "status issue é: " + EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW.getId());
+					if((!creatorStatus.equals(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW)) && 
+						(!creatorStatus.equals(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.IN_REVIEW))){
+						if(creatorStatus.equals(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.PLEASE_SELECT)){
+							issueAppObj.getAttribute(IIssueAttributeTypeCustom.ATTR_IS_CREATOR_STATUS).setRawValue(
+									Collections.singletonList(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW)
+							);
+							log.info(this.getClass().getName(), "status issue é: " + EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW.getId());
+						}
 					}
 				}
 				if(actionTypeItem.getId().equals("actionplan")){

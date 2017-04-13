@@ -1,5 +1,7 @@
 package com.idsscheer.webapps.arcm.bl.component.issuemanagement.commands;
 
+import java.util.Date;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -23,7 +25,6 @@ import com.idsscheer.webapps.arcm.common.constants.metadata.EnumerationsCustom;
 import com.idsscheer.webapps.arcm.common.constants.metadata.ObjectType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeType;
 import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssueAttributeTypeCustom;
-import com.idsscheer.webapps.arcm.common.constants.metadata.attribute.IIssuerelevantobjectAttributeType;
 import com.idsscheer.webapps.arcm.common.license.LicensedComponent;
 import com.idsscheer.webapps.arcm.common.resources.IResourceBundle;
 import com.idsscheer.webapps.arcm.common.resources.ResourceBundleFactory;
@@ -142,6 +143,16 @@ public class CustomCreateIssueCommand implements ICommand {
 				Collections.singletonList(EnumerationsCustom.CENUM_IS_CREATOR_STATUS.NEW)
 		);
 		
+		//GAP GRC74 - Definir Data do Apontamento
+		issue.getAttribute(IIssueAttributeTypeCustom.ATTR_ISSUE_DATE).setRawValue(
+			new Date()
+		);
+		
+		//GAP GRC74 - Definir Ano Base do Apontamento
+		issue.getAttribute(IIssueAttributeTypeCustom.ATTR_ISSUE_YEAR).setRawValue(
+			String.valueOf(Calendar.getInstance().get(Calendar.YEAR))	
+		);
+				
 		issue.getAttribute(createIssueCommandRootObjectDataProvider.getIssueCreatedByAttribute())
 				.setRawValue(Boolean.TRUE);
 		issue.getAttribute(createIssueCommandRootObjectDataProvider.getIssueRelationType())

@@ -53,10 +53,11 @@ public interface IIssueAttributeTypeCustom extends IIssueAttributeType {
 	public static final String STR_ISSUE_DATE="issue_date";
 	public static final IDateAttributeType   ATTR_ISSUE_DATE=(IDateAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_ISSUE_DATE);
 	
+	/*
 	public static final String STR_ENDDATEACTIONPLAN="enddateactionplan";
 	public static final IDateAttributeType ATTR_ENDDATEACTIONPLAN=(IDateAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_ENDDATEACTIONPLAN);
 	
 	public static final String STR_ENDDATEISSUE="enddateissue";
-	public static final IDateAttributeType ATTR_ENDDATEISSUE=(IDateAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_ENDDATEISSUE);
+	public static final IDateAttributeType ATTR_ENDDATEISSUE=(IDateAttributeType)MetadataConstantsUtil.create(OBJECT_TYPE, STR_ENDDATEISSUE);*/
 	
 }
