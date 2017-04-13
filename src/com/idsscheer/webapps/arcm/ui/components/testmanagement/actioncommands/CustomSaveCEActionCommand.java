@@ -1,15 +1,14 @@
 package com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.aris.umc.audit.event.UserUpdate;
-import com.idsscheer.webapps.arcm.bl.authorization.rights.config.RoleConfigFacade;
-import com.idsscheer.webapps.arcm.bl.authorization.rights.runtime.accesscontrol.standard.UserAccessControl;
-import com.idsscheer.webapps.arcm.bl.authorization.rights.runtime.userrole.UserRoleFacade;
-import com.idsscheer.webapps.arcm.bl.authorization.rights.support.UserRoleUtility;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObj;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.IAppObjFacade;
 import com.idsscheer.webapps.arcm.bl.models.objectmodel.attribute.IEnumAttribute;
@@ -36,6 +35,8 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 	private String view_ce_version_number = "version_number";*/
 	private String riscoPotencial = "";
 	private String currStatus = "";
+	private String control2line = "";
+	private String control3line = "";
 	final Logger log = Logger.getLogger(CustomSaveCEActionCommand.class.getName());
 
 	protected void afterExecute(){
@@ -55,6 +56,8 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			IAppObj riskParentObj = this.getRiskFromControl(currParentCtrlObj);
 			log.info("risk parent obj: " + riskParentObj.toString());
 			this.riscoPotencial = riskParentObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_RESULT).getRawValue();
+			this.control2line = riskParentObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
+			this.control3line = riskParentObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue();
 			this.affectResidualRisk(riskParentObj);
 			
 			
@@ -85,12 +88,12 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 		IAppObjQuery riskQuery = riskFacade.createQuery();
 		IAppObjIterator riskIterator = riskQuery.getResultIterator();
 		IAppObj riskAppObj = null;
-		log.info("infra para obtenção de risco pronta");
+		//log.info("infra para obtenção de risco pronta");
 		
 		while(riskIterator.hasNext()){
 			
 			IAppObj riskObj = riskIterator.next();
-			log.info("risco lido" + riskObj.getAttribute(IRiskAttributeType.ATTR_NAME).getRawValue());
+			//log.info("risco lido" + riskObj.getAttribute(IRiskAttributeType.ATTR_NAME).getRawValue());
 			
 			if(!(riskAppObj == null))
 				break;
@@ -98,7 +101,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			List<IAppObj> ctrlList = riskObj.getAttribute(IRiskAttributeType.LIST_CONTROLS).getElements(this.getUserContext());
 			for(IAppObj ctrlObj : ctrlList){
 				if(ctrlObj.getGuid().equals(controlObj.getGuid())){
-					log.info("risco do controle" + riskObj.getAttribute(IRiskAttributeType.ATTR_NAME).getRawValue());
+					//log.info("risco do controle" + riskObj.getAttribute(IRiskAttributeType.ATTR_NAME).getRawValue());
 					riskAppObj = riskObj;
 					break;
 				}
@@ -176,9 +179,11 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 		
 		double countTotal = 0;
 		double count1line = 0;
+		//SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
-		if(this.currStatus.equals("ineffective"))
-			count1line += 1;
+		log.info("Eficacia do Controle Corrente: " + this.currStatus);
+		/*if(this.currStatus.equals("ineffective"))
+			count1line += 1;*/
 		
 		try{
 			
@@ -190,17 +195,42 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			List<IAppObj> controlList = riskObj.getAttribute(IRiskAttributeType.LIST_CONTROLS).getElements(this.getUserContext());
 			for(IAppObj controlObj : controlList){
 				
+				//Date ceDate = null;
+				log.info("==================================================");
+				log.info("Controle Lido: " + controlObj.getAttribute(IControlAttributeType.ATTR_NAME).getRawValue());
+				log.info("==================================================");
+				//countTotal +=1;
+				
 				List<IAppObj> cetList = controlObj.getAttribute(IControlAttributeType.LIST_CONTROLEXECUTIONTASKS).getElements(this.getUserContext());
 				for(IAppObj cetObj : cetList){
 					
 					List<IAppObj> ceList = this.getCtrlExecFromCET(cetObj);
 					for(IAppObj ceObj : ceList){
-						countTotal += 1;
-						IEnumAttribute statusAttr = ceObj.getAttribute(IControlexecutionAttributeTypeCustom.ATTR_CUSTOMCTRLEXECSTATUS);
-						IEnumerationItem statusItem = ARCMCollections.extractSingleEntry(statusAttr.getRawValue(), true);
-						if(statusItem.getId().equals("ineffective")){
-							count1line += 1;
+						log.info("Data EC: " + String.valueOf(ceObj.getVersionData().getCreateDate().getTime()));
+						
+						if(ceObj.getGuid().equals(this.formModel.getAppObj().getGuid())){
+							if(this.requestContext.getParameter(IControlexecutionAttributeType.STR_OWNER_STATUS).equals("3")){
+								countTotal += 1;
+								log.info("Status EC: COMPLETED");
+								if(this.currStatus.equals("ineffective"))
+									count1line += 1;
+							}
+						}else{
+							IEnumAttribute ownerStatusAttr = ceObj.getAttribute(IControlexecutionAttributeType.ATTR_OWNER_STATUS);
+							IEnumerationItem ownerStatus = ARCMCollections.extractSingleEntry(ownerStatusAttr.getRawValue(), true);
+							IEnumAttribute statusAttr = ceObj.getAttribute(IControlexecutionAttributeTypeCustom.ATTR_CUSTOMCTRLEXECSTATUS);
+							IEnumerationItem statusItem = ARCMCollections.extractSingleEntry(statusAttr.getRawValue(), true);
+							if(ownerStatus.getId().equals("completed")){
+								countTotal += 1;
+								log.info("Status EC: COMPLETED*");
+								if(statusItem.getId().equals("ineffective"))
+									count1line += 1;
+							}
 						}
+						
+						//countTotal += 1;
+						log.info("CE Totais: " + String.valueOf(countTotal));
+						log.info("CE Inefetivos: " + String.valueOf(count1line));
 					}
 					
 				}
@@ -208,29 +238,45 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			}
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_INEF1LINE).setRawValue(count1line);
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_FINAL1LINE).setRawValue(countTotal);
-			double risk1line = ( count1line / countTotal );
+			double risk1line = 0;
+			if(countTotal > 0)
+				risk1line = ( count1line / countTotal );
+			
 			String riskClass1line = this.riskClassification(risk1line);
 			log.info("Controles Inefetivos: " + String.valueOf(count1line));
 			log.info("Total de Controles: " + String.valueOf(countTotal));
 			log.info("Ponderação: " + String.valueOf(risk1line));
 			riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL1LINE).setRawValue(riskClass1line);
 			
-			String riskClass2line = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
+			/*String riskClass2line = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL2LINE).getRawValue();
 			if(riskClass2line == null)
 				riskClass2line = "";
 				
 			String riskClass3line = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROL3LINE).getRawValue();
 			if(riskClass3line == null)
-				riskClass3line = "";
+				riskClass3line = "";*/
 			
 			//String riskClassFinal = this.riskFinalClassification(riskClass1line, riskClass2line, riskClass3line);
 			String riskClassFinal = riskClass1line;
 			if(riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).isEmpty()){
 				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+				log.info("CONTROLFINAL é Vazio");
+				log.info("CONTROLFINAL: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue());
 			}else{
 				String riskFinal = riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue();
-				riskClassFinal = this.riskFinalClass(riskClass1line, riskFinal);
+				log.info("riskFinal: " + riskFinal);
+				log.info("riskClass1line: " + riskClass1line);
+				
+				if((!this.control2line.equals("")) || (!this.control3line.equals(""))){
+					riskClassFinal = riskClass1line;
+				}else{
+					riskClassFinal = this.riskFinalClass(riskClass1line, riskFinal);
+				}
+				
+				log.info("riskClassFinal: " + riskClassFinal);
 				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).setRawValue(riskClassFinal);
+				log.info("CONTROLFINAL não é Vazio");
+				log.info("CONTROLFINAL: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue());
 			}
 			log.info("Amb. Controle Final: " + riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_CONTROLFINAL).getRawValue());
 			log.info("Risco Potencial: " + this.riscoPotencial);
@@ -254,22 +300,53 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 		IAppObjQuery ceQuery = ceFacade.createQuery();
 		IAppObjIterator ceIterator = ceQuery.getResultIterator();
 		List<IAppObj> ceListReturn = new ArrayList<IAppObj>();
-		log.info("Infra para obtenção de Control Execution");
+		List<IAppObj> ceListBuffer = new ArrayList<IAppObj>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		//log.info("Infra para obtenção de Control Execution");
 		
 		while(ceIterator.hasNext()){
 			
 			IAppObj ceObj = ceIterator.next();
-			log.info("CExec Lido: " + ceObj.getAttribute(IControlexecutionAttributeType.ATTR_NAME).getRawValue());
+			//log.info("CExec Lido: " + ceObj.getAttribute(IControlexecutionAttributeType.ATTR_NAME).getRawValue());
 			
 			List<IAppObj> ctList = ceObj.getAttribute(IControlexecutionAttributeType.LIST_CONTROLEXECUTIONTASK).getElements(this.getUserContext());
 			for(IAppObj ctObj : ctList){
 				if(ctObj.getGuid().equals(cetObj.getGuid())){
-					log.info("CExec Adicionado: " + ceObj.getAttribute(IControlexecutionAttributeType.ATTR_NAME).getRawValue());
-					ceListReturn.add(ceObj);
+					//log.info("CExec Adicionado: " + ceObj.getAttribute(IControlexecutionAttributeType.ATTR_NAME).getRawValue());
+					ceListBuffer.add(ceObj);
 				}
 			}
 			
 		}
+		ceListBuffer.sort(new Comparator<IAppObj>(){
+			@Override
+			public int compare(IAppObj ant, IAppObj post){
+				long antTime = ant.getVersionData().getCreateDate().getTime();
+				long postTime = post.getVersionData().getCreateDate().getTime();
+				return antTime < postTime ? -1 : antTime == postTime ? 0 : 1;
+			}
+		});
+		/*log.info("Lista Ordenada");
+		log.info("=================================");
+		log.info("Resultado da Ordenação");
+		for(int i = 0; i < ceListBuffer.size(); i++){
+			//IAppObj ce = (IAppObj)ceListItBuffer.next();
+			IAppObj ce = ceListBuffer.get(i);
+			
+			log.info("Data Criação CE: " + dateFormat.format(ce.getVersionData().getCreateDate()) + 
+					" - " + String.valueOf(ce.getVersionData().getCreateDate().getTime()));
+		}*/
+		
+		/*for(int i = 0; i < ceListReturn.size(); i++){
+			if(i == 0)
+				continue;
+			ceListReturn.remove(i);
+			i -= 1;
+		}*/
+		ceListReturn.add(ceListBuffer.get(ceListBuffer.size() - 1));
+		log.info("Remoção de Todos os CE não relevantes");
+		log.info("Tamanho da Lista de CE: " + String.valueOf(ceListReturn.size()));
+		
 		ceQuery.release();
 		
 		return (List<IAppObj>)ceListReturn;
@@ -398,7 +475,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 		int height_final = 0;
 		String riskClassFinal = "";
 		
-		//Classificação - Amb. Controles 1a Linha
+
 		if(risk1line.equalsIgnoreCase("Muito Alto"))
 			height_1line = 4;
 		if(risk1line.equalsIgnoreCase("Alto"))
@@ -407,8 +484,8 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			height_1line = 2;
 		if(risk1line.equalsIgnoreCase("Baixo"))
 			height_1line = 1;
-		
-		//Classificação - Amb. Controles 1a Linha
+		log.info("height_1line: " + height_1line);
+
 		if(riskFinal.equalsIgnoreCase("Muito Alto"))
 			height_final = 4;
 		if(riskFinal.equalsIgnoreCase("Alto"))
@@ -417,8 +494,9 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 			height_final = 2;
 		if(riskFinal.equalsIgnoreCase("Baixo"))
 			height_final = 1;
+		log.info("height_final: " + height_final);
 		
-		if(height_1line > height_final){
+		if(height_1line >= height_final){
 			switch(height_1line){
 			case 4:
 				riskClassFinal = "Muito Alto";
@@ -433,6 +511,8 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 				riskClassFinal = "Baixo";
 				break;
 			}			
+		}else{
+			riskClassFinal = riskFinal;
 		}
 		return riskClassFinal;
 	}
