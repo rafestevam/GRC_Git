@@ -81,7 +81,7 @@
                 <row id="anomaly_rate">
                     <element attribute.idref="anomaly_rate"/>
                 </row>
-                <row id="owner_status">
+                <row id="owner_status" propertyKey="form.row.form_controlexecution.owner_status.DBI">
                     <element attribute.idref="owner_status">
                         <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
                     </element>

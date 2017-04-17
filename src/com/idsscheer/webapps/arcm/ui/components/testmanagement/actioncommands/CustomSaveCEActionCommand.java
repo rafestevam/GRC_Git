@@ -199,7 +199,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 				log.info("==================================================");
 				log.info("Controle Lido: " + controlObj.getAttribute(IControlAttributeType.ATTR_NAME).getRawValue());
 				log.info("==================================================");
-				//countTotal +=1;
+				countTotal +=1;
 				
 				List<IAppObj> cetList = controlObj.getAttribute(IControlAttributeType.LIST_CONTROLEXECUTIONTASKS).getElements(this.getUserContext());
 				for(IAppObj cetObj : cetList){
@@ -210,7 +210,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 						
 						if(ceObj.getGuid().equals(this.formModel.getAppObj().getGuid())){
 							if(this.requestContext.getParameter(IControlexecutionAttributeType.STR_OWNER_STATUS).equals("3")){
-								countTotal += 1;
+								//countTotal += 1;
 								log.info("Status EC: COMPLETED");
 								if(this.currStatus.equals("ineffective"))
 									count1line += 1;
@@ -221,7 +221,7 @@ public class CustomSaveCEActionCommand extends BaseSaveActionCommand {
 							IEnumAttribute statusAttr = ceObj.getAttribute(IControlexecutionAttributeTypeCustom.ATTR_CUSTOMCTRLEXECSTATUS);
 							IEnumerationItem statusItem = ARCMCollections.extractSingleEntry(statusAttr.getRawValue(), true);
 							if(ownerStatus.getId().equals("completed")){
-								countTotal += 1;
+								//countTotal += 1;
 								log.info("Status EC: COMPLETED*");
 								if(statusItem.getId().equals("ineffective"))
 									count1line += 1;

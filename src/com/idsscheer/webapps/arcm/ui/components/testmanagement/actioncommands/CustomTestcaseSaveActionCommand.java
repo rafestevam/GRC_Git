@@ -1,6 +1,7 @@
 package com.idsscheer.webapps.arcm.ui.components.testmanagement.actioncommands;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -239,6 +240,12 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			
 			String riskClassFinal = "";
 			
+			if(cntTotal2Line == 0)
+				cntInef2Line = 0;
+			
+			if(cntTotal3Line == 0)
+				cntInef3Line = 0;
+			
 			if(this.origemTeste.equals("1linhadefesa")){
 				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_INEF2LINE).setRawValue(cntInef2Line);
 				riskUpdObj.getAttribute(IRiskAttributeTypeCustom.ATTR_RA_FINAL2LINE).setRawValue(cntTotal2Line);
@@ -326,6 +333,7 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 		IAppObjQuery tcQuery = tcFacade.createQuery();
 		IAppObjIterator tcIterator = tcQuery.getResultIterator();
 		List<IAppObj> testCaseReturn = new ArrayList<IAppObj>();
+		List<IAppObj> testCaseBuffer = new ArrayList<IAppObj>();
 		//log.info("Infra para obtenção de Test Case montada");
 		
 		while(tcIterator.hasNext()){
@@ -337,10 +345,22 @@ public class CustomTestcaseSaveActionCommand extends TestcaseSaveActionCommand {
 			for(IAppObj tdObj : tdList){
 				if(tdObj.getGuid().equals(testDefObj.getGuid())){
 					//log.info("TestCase Adicionado: " + tcObj.getAttribute(ITestcaseAttributeType.ATTR_NAME).getRawValue());
-					testCaseReturn.add(tcObj);
+					testCaseBuffer.add(tcObj);
 				}
 			}
 		}
+		
+		//Ordenação por data de criação dos Test Case
+		testCaseBuffer.sort(new Comparator<IAppObj>(){
+			@Override
+			public int compare(IAppObj ant, IAppObj post){
+				long antTime = ant.getVersionData().getCreateDate().getTime();
+				long postTime = post.getVersionData().getCreateDate().getTime();
+				return antTime < postTime ? -1 : antTime == postTime ? 0 : 1;
+			}
+		});
+		
+		testCaseReturn.add(testCaseBuffer.get(testCaseBuffer.size() - 1));
 		tcQuery.release();
 		
 		return (List<IAppObj>) testCaseReturn;

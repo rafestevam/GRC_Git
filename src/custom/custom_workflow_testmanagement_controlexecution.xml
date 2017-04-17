@@ -29,19 +29,23 @@
                 <update to.state.id="openForExecution" chain.id="executionInProgress">
                     <attribute.change id="owner_status" to="open"/>
                 </update>
-                <update to.state.id="notPossible" chain.id="notPossible">
-                    <attribute.change id="owner_status" to="not_possible"/>
-                </update>
+                <!-- Inicio GAP - GRC29 -->
+<!--                 <update to.state.id="notPossible" chain.id="notPossible"> -->
+<!--                     <attribute.change id="owner_status" to="not_possible"/> -->
+<!--                 </update> -->
+				<!-- Fim GAP - GRC29 -->
                 <update to.state.id="completed" chain.id="completed">
                     <attribute.change id="owner_status" to="completed"/>
                 </update>
                 <delete to.state.id="deleted" chain.id="delete"/>
             </transitions>
         </state>
-
-        <state id="notPossible">
-            <attribute id="owner_status" value="not_possible"/>
-        </state>
+		
+		<!-- Inicio GAP - GRC29 -->
+<!--         <state id="notPossible"> -->
+<!--             <attribute id="owner_status" value="not_possible"/> -->
+<!--         </state> -->
+		<!-- Fim GAP - GRC29 -->
 
         <state id="completed">
             <attribute id="owner_status" value="completed"/>            

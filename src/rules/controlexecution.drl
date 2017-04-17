@@ -214,7 +214,7 @@ rule "GRC98_invisible_fields[I,V]"
 		set "completion_rate"         invisible
 		set "anomaly_rate"            invisible
 		set "execution_date"          invisible
-		set "remark"                  invisible
+#		set "remark"                  invisible
 
 end
 
@@ -229,6 +229,22 @@ rule "GRC98_set_custom_controlexecstatus_visible[I,V]"
 		set "activities"               invisible
 		set "selectivity"              invisible
 		set "result_format"            invisible
+
+end
+
+rule "GRC29_set_controlexecutiontask_invisible[I,V]"
+
+	salience 80
+	no-loop true
+	
+	when
+	
+	then
+		set "controlexecutiontask"     invisible
+		set "plannedstartdate"         invisible
+		set "plannedenddate"           invisible
+		set "documents"                editable
+		set "remark"                   editable
 
 end
 

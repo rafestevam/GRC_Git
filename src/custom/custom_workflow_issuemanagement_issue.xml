@@ -76,7 +76,7 @@
                 <update to.state.id="apOpenForCreation" chain.id="creationInPreparation">
 					<attribute.change id="custom_ap_creator_status" to="new"/>
                 </update>
-                <update to.state.id="apOpenForExecution" chain.id="apCreationReleased">
+                <update to.state.id="apOpenForExecution" chain.id="creationReleased">
                     <attribute.change id="custom_ap_creator_status" to="in_progress"/>
                 </update>
                 <update to.state.id="apDirectReview" chain.id="closedByCreator">
@@ -117,8 +117,8 @@
         
         <state id="apOpenForExecution">
         	<attribute id="custom_ap_creator_status"   value="in_progress"/>
-        	<attribute id="custom_ap_owner_status"     value="in_progress"/>
-        	<attribute id="custom_ap_reviewer_status"  value="not_approved"/>
+        	<attribute id="custom_ap_owner_status"     value="open"/>
+        	<attribute id="custom_ap_reviewer_status"  value="open"/>
             <transitions>
                 <update to.state.id="apOpenForExecution" chain.id="executionInProgress">
                 	<attribute.change id="custom_ap_owner_status" to="in_progress"/>
@@ -230,7 +230,7 @@
         <state id="apOpenForReview">
         	<attribute id="custom_ap_creator_status"   value="in_progress"/>
         	<attribute id="custom_ap_owner_status"     value="to_be_reviewed"/>
-        	<attribute id="custom_ap_reviewer_status"  value="to_be_approved"/>        
+        	<attribute id="custom_ap_reviewer_status"  value="open"/>        
 <!--             <attribute id="creator_status"      value="released"/> -->
 <!--             <attribute id="owner_status" 	    value="to_be_reviewed"/> -->
 <!--             <attribute id="reviewer_status"	    value="to_be_approved"/> -->
@@ -253,7 +253,7 @@
         <state id="apDirectReview">
         	<attribute id="custom_ap_creator_status"   value="to_be_reviewed"/>
 <!--         	<attribute id="custom_ap_owner_status"     value="to_be_reviewed"/> -->
-        	<attribute id="custom_ap_reviewer_status"  value="to_be_approved"/>        
+        	<attribute id="custom_ap_reviewer_status"  value="open"/>        
             <transitions>
 <!--                 <update to.state.id="openForReview" chain.id="reviewInProgress"> -->
 <!--                     <attribute.change id="owner_status" 	    to="to_be_reviewed"/> -->

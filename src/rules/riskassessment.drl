@@ -323,6 +323,8 @@ rule "risk reviewer - define mandatory fields [I,V]"
 	then
 		set "reviewer_status" editable
 		set "reviewer_status" mandatory
+		set "documents"       editable #GAP - GRC29
+		set "remark"          editable #GAP - GRC29
 
 end
 
@@ -357,6 +359,7 @@ rule "set_ovid_invisible[I,V]"
 	when
 	
 	then
-		set "height" invisible
+		set "height"                   invisible
+		set "assessment_activities"    invisible
 
 end

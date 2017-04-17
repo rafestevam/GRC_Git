@@ -52,7 +52,10 @@
         <enumAttrType id="basis_of_valuation" enumeration="basis_of_valuation" defaultValue="0"/>
         <enumAttrType id="data_source" enumeration="data_source" defaultValue="0"/>
         <enumAttrType id="currency" enumeration="currency" defaultValue="0"/>
-        <enumAttrType id="owner_status" enumeration="assessment_state" defaultValue="1"/>
+        <!-- Inicio GAP - GRC29 -->
+<!--         <enumAttrType id="owner_status" enumeration="assessment_state" defaultValue="1"/> -->
+        <enumAttrType id="owner_status" enumeration="custom_assessment_state" defaultValue="1"/>
+        <!-- Fim GAP - GRC29 -->
         <enumAttrType id="reviewer_status" enumeration="review_state" defaultValue="0"/>
         <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="3174"/>
         <textAttrType id="remark"/>

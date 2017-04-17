@@ -1002,3 +1002,4 @@ rule "custom_set_issuesource[I,V]"
 		set "priority"          invisible
 		set "category"          invisible
 end
+	

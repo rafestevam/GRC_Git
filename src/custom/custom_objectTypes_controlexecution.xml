@@ -13,7 +13,12 @@
         <listAttrType id="owner" maxSize="1" objectType.idref="USER" linkType="6057" />
         <listAttrType id="owner_substitute" maxSize="1" objectType.idref="USER" linkType="6058"/>
         <!-- represents the documentation state -->
-        <enumAttrType id="owner_status" enumeration="controlexecution_owner_status" defaultValue="1"/>
+        
+        <!-- Inicio GAP - GRC29 -->
+<!--         <enumAttrType id="owner_status" enumeration="controlexecution_owner_status" defaultValue="1"/> -->
+        <enumAttrType id="owner_status" enumeration="custom_controlexecution_owner_status" defaultValue="1"/>
+        <!-- Fim GAP - GRC29 -->
+        
         <!-- reviewer is not used at the moment, but has to be define due to the inheritance of the MONITORABLE-object -->
         <listAttrType id="reviewer_group" maxSize="0" objectType.idref="USERGROUP" linkType="6059"/>
         <listAttrType id="reviewer" maxSize="1" objectType.idref="USER" linkType="6060" />
@@ -78,6 +83,10 @@
         <enumAttrType id="due_status" defaultValue="1" enumeration="due_status" />
         <textAttrType id="remark"/>
         <listAttrType id="execution_documents" objectType.idref="DOCUMENT" linkType="6065"/>
+        
+        <!-- Inicio GAP GRC29 -->
+        <stringAttrType id="control_id" maxCharCount="80" isMassEditable="true" objectType.idref="CONTROL"/>
+        <!-- Fim GAP GRC29 -->
         
         <!-- Inicio GAP GRC98 -->
         <enumAttrType id="custom_controlexecstatus" defaultValue="1" enumeration="custom_controlexecstatus" />
